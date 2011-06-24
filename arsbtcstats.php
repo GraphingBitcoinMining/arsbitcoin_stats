@@ -5,7 +5,7 @@ $now = time();
 $host = "localhost";
 $database = "arsbtcstats";
 $user = "arsbtcstats";
-$password = "TxJ58AZ2EZ9fDD99";
+$password = "password";
 $db = mysql_connect($host,$user,$password);
 mysql_select_db($database,$db);
 
