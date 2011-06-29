@@ -74,33 +74,24 @@ $(function () {
     $("#placeholder").bind("plothover", function (event, pos, item) {
         $("#x").text(pos.x.toFixed(2));
         $("#y").text(pos.y.toFixed(2));
-
-        if (!$("#enableTooltip:checked").length > 0) {
-            if (item) {
-                if (previousPoint != item.dataIndex) {
-                    previousPoint = item.dataIndex;
-                    
-                    $("#tooltip").remove();
-                    var x = item.datapoint[0].toFixed(2),
-                        y = item.datapoint[1].toFixed(2);
-                    
-                    showTooltip(item.pageX, item.pageY,
-                                item.series.label + " of " + x + " = " + y);
-                }
-            }
-            else {
-                $("#tooltip").remove();
-                previousPoint = null;            
-            }
-        }
+       
+		if (item) {
+			if (previousPoint != item.dataIndex) {
+				previousPoint = item.dataIndex;
+				
+				$("#tooltip").remove();
+				var x = item.datapoint[0].toFixed(2),
+					y = item.datapoint[1].toFixed(2);
+				
+				showTooltip(item.pageX, item.pageY,
+							item.series.label + " of " + x + " = " + y);
+			}
+		}
+            
+        
     });
 
-    $("#placeholder").bind("plotclick", function (event, pos, item) {
-        if (item) {
-            $("#clickdata").text("You clicked point " + item.dataIndex + " in " + item.series.label + ".");
-            plot.highlight(item.series, item.datapoint);
-        }
-    });
+    
 });
 </script>
 
