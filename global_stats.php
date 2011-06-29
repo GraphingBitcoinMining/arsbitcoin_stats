@@ -44,7 +44,6 @@ if (debug == 1)
     print $datapoints;
     echo "<br>";
   }
-print $datapoints;
 
 mysql_free_result($result);
     ?>
