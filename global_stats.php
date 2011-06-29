@@ -15,14 +15,19 @@
     $time_raw=array(); $hashrate_raw=array();
    while($row = mysql_fetch_array($result))
       {
-        $time_raw[] = (int)$row["time"];
-        $hashrate_raw[] = (int)$row["hashrate"];
+        $time_raw[] = (int)$row["time"]*1000;
+        $hashrate_raw[] = (int)$row["hashrate"]/1000;
       }
 	  
     //echo $row["time"];
     $time = array_reverse($time_raw);
     $hashrate = array_reverse($hashrate_raw);
 
+	//for ( $i = 0; $i < sizeof($time); $i++)
+	//{
+	//	$time[$i] = date("Y-m-d H:i:s", $time[$i]);
+	//}
+	
 function make_pair($time, $hashrate) {
     return array($time, $hashrate);
 }
@@ -40,6 +45,7 @@ if (debug == 1)
     echo "<br>";
   }
 print $datapoints;
+
 mysql_free_result($result);
     ?>
 	<div id="placeholder" style="width:600px;height:300px"></div>
@@ -49,11 +55,16 @@ $(function () {
     var d1 = <?PHP echo $datapoints; ?>;
     
     var plot = $.plot($("#placeholder"),
-           [ { data: d1, label: "Hashrate"} ], {
+           [ { data: d1, label: "Hashrate (GH)"} ], {
                series: {
                    lines: { show: true },
-                   points: { show: true }
+                   points: { show: true },
+				   
                },
+			   xaxis: {
+						mode: "time",
+						timeformat: "%H:%M<br>%m/%d"
+				 },
                grid: { hoverable: true, clickable: true }
              });
 
