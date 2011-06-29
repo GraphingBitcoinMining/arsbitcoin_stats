@@ -11,7 +11,7 @@
     $db = mysql_connect("localhost", "arsbtcstats", "password");
     mysql_select_db("arsbtcstats", $db);
 
-    $request = "SELECT * FROM `global_stats` ORDER BY `id` DESC LIMIT 0,20";
+    $request = "SELECT * FROM `global_stats` ORDER BY `id` DESC LIMIT 0,100";
     $result = mysql_query($request,$db);
     $time_raw=array(); $hashrate_raw=array();
    while($row = mysql_fetch_array($result))
@@ -29,11 +29,11 @@ function make_pair($time, $hashrate) {
 }
 
 $hasharray = array_map('make_pair', $time, $hashrate);
-echo "regular array: ";
-print_r($hasharray);
-echo "<br>JSON encoded: ";
+//echo "regular array: ";
+//print_r($hasharray);
+//echo "<br>JSON encoded: ";
 $datapoints = json_encode($hasharray);
-print $datapoints;
+//print $datapoints;
 mysql_free_result($result);
     ?>
 	<div id="placeholder" style="width:600px;height:300px"></div>
