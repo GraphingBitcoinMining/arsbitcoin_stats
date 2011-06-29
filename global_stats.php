@@ -1,6 +1,6 @@
 ﻿<head>
-<script type="text/javascript" src="/arsstats/js/flot/jquery.js"></script>
-<script type="text/javascript" src="/arsstats/js/flot/jquery.flot.js"></script>
+<script type="text/javascript" src="./js/flot/jquery.js"></script>
+<script type="text/javascript" src="./js/flot/jquery.flot.js"></script>
 <title>View Hashrate</title>
 </head>
 <body>
