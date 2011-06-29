@@ -2,10 +2,7 @@
 
 $now = time();
 
-$host = "localhost";
-$database = "arsbtcstats";
-$user = "arsbtcstats";
-$password = "password";
+include("config.php");
 $db = mysql_connect($host,$user,$password);
 mysql_select_db($database,$db);
 $api_key="7e468d0bda6a6c98cdf7e1173d65c4f315fb6f4937160049dff1af4775ab9db2";

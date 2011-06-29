@@ -6,10 +6,7 @@
 <body>
 <?php
     $debug = $_GET['debug'];
-    
-    $dbuser = "arsbtcstats";
-    $dbpassword = "password";
-    $database = "arsbtcstats";
+    include("config.php");
     $db = mysql_connect("localhost", "arsbtcstats", "password");
     mysql_select_db("arsbtcstats", $db);
 
