@@ -5,6 +5,8 @@
 </head>
 <body>
 <?php
+    $debug = $_GET['debug'];
+    
     $dbuser = "arsbtcstats";
     $dbpassword = "password";
     $database = "arsbtcstats";
@@ -29,10 +31,17 @@ function make_pair($time, $hashrate) {
 }
 
 $hasharray = array_map('make_pair', $time, $hashrate);
-echo "regular array: ";
-print_r($hasharray);
-echo "<br>JSON encoded: ";
 $datapoints = json_encode($hasharray);
+if (debug == 1)
+  {
+    echo "Debug enabled!";
+    echo "<br>";
+    echo "regular array: ";
+    print_r($hasharray);
+    echo "<br>JSON encoded: ";
+    print $datapoints;
+    echo "<br>";
+  }
 print $datapoints;
 mysql_free_result($result);
     ?>
