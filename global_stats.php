@@ -34,7 +34,7 @@ function make_pair($time, $hashrate) {
 
 $hasharray = array_map('make_pair', $time, $hashrate);
 $datapoints = json_encode($hasharray);
-if ($_POST[debug] == 1)
+if ($_GET[debug] == 1)
   {
     echo "Debug enabled!";
     echo "<br>";
