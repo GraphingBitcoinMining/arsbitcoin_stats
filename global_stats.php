@@ -65,12 +65,11 @@ $(function () {
 	var d2 = <?PHP echo $datapoints2; ?>;
     
     var plot = $.plot($("#placeholder"),
-           [ { data: d1, label: "Hashrate (GH)"}, { data: d2, label: "Workers"} ], {
+           [ { data: d1, label: "Hashrate (GH)", color: "<?php echo $hr_color; ?>"}, { data: d2, label: "Workers", color: "<?php echo $worker_color; ?>" } ], {
                series: {
                    lines: { show: true },
-                   points: { show: true },
-				   
-               },
+                   points: { show: true }
+				},
 			   xaxis: {
 						mode: "time",
 						timeformat: "%H:%M<br>%m/%d"
