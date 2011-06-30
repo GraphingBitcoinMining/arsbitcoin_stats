@@ -1,10 +1,4 @@
-﻿<head>
-<script type="text/javascript" src="./js/flot/jquery.js"></script>
-<script type="text/javascript" src="./js/flot/jquery.flot.js"></script>
-<title>View Hashrate</title>
-</head>
-<body>
-<?php
+﻿<?php
     $debug = $_GET['debug'];
     include("config.php");
     $db = mysql_connect("localhost", "arsbtcstats", "password");
@@ -124,5 +118,3 @@ $(function () {
     
 });
 </script>
-
-	</body>
