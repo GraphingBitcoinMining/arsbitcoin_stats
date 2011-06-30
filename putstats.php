@@ -3,7 +3,7 @@ $now = time();
 $type = $_GET['type'];
 include("config.php");
 if(isset($_GET['api_key'])) $api_key = $_GET['api_key'];
-require_once('showstats.php');
+require_once('getstats.php');
 $db = mysql_connect($host,$dbuser,$dbpassword);
 mysql_select_db($database,$db);
 
