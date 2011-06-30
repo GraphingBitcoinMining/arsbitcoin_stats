@@ -65,7 +65,7 @@ $(function () {
 	var d2 = <?PHP echo $datapoints2; ?>;
     
     var plot = $.plot($("#placeholder"),
-           [ { data: d1, label: "Hashrate (GH)"}, { data: d2, label: "Current Workers"} ], {
+           [ { data: d1, label: "Hashrate (GH)"}, { data: d2, label: "Workers"} ], {
                series: {
                    lines: { show: true },
                    points: { show: true },
@@ -75,7 +75,7 @@ $(function () {
 						mode: "time",
 						timeformat: "%H:%M<br>%m/%d"
 				 },
-				 
+				 yaxis: { max: <?php echo (max($workers) + 50); ?> , tickSize: 25},
                grid: { hoverable: true, clickable: true }
              });
 
@@ -115,7 +115,7 @@ $(function () {
 					var datetime = hours  + ':' + minutes + '  ' + month + '/' + day;
 				
 				showTooltip(item.pageX, item.pageY,
-							"<center>" + item.series.label +" at <br>" + datetime + "<br>= " + y + "</center>");
+							"<center>" + item.series.label +" at <br>" + datetime + " =<br>" + y + "</center>");
 			}
 		}
             
