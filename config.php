@@ -1,5 +1,5 @@
 <?php
-$api_key="7e468d0bda6a6c98cdf7e1173d65c4f315fb6f4937160049dff1af4775ab9db2";
+$api_key="f891403409a40aef81e51155e8b427725c20cdbb019f62054e3e1b9cc68267b5";
 
 $host = "localhost";
 $dbuser = "arsbtcstats";
