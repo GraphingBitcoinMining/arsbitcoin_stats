@@ -34,7 +34,7 @@ function make_pair($time, $hashrate) {
 
 $hasharray = array_map('make_pair', $time, $hashrate);
 $datapoints = json_encode($hasharray);
-if (debug == 1)
+if ($_POST[debug] == 1)
   {
     echo "Debug enabled!";
     echo "<br>";
@@ -90,11 +90,20 @@ $(function () {
 				previousPoint = item.dataIndex;
 				
 				$("#tooltip").remove();
-				var x = item.datapoint[0].toFixed(2),
-					y = item.datapoint[1].toFixed(2);
+				var x = item.datapoint[0],
+					y = item.datapoint[1];
+					var time = new Date(x);
+					var month = time.getMonth() + 1;
+					var day = time.getDate() + 1;
+					var hours = time.getUTCHours();
+					var minutes = time.getMinutes() ;
+					if (minutes < 10){
+					minutes = "0" + minutes
+					}
+					var datetime = hours  + ':' + minutes + '  ' + month + '/' + day;
 				
 				showTooltip(item.pageX, item.pageY,
-							item.series.label + " of " + x + " = " + y);
+							"<center>Hashrate at <br>" + datetime + "<br>= " + y + "GH</center>");
 			}
 		}
             
