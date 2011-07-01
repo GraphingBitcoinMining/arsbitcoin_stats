@@ -1,8 +1,8 @@
 ﻿<?php
     $debug = $_GET['debug'];
     include("config.php");
-    $db = mysql_connect("localhost", "arsbtcstats", "password");
-    mysql_select_db("arsbtcstats", $db);
+    $db = mysql_connect("$host", "$database", "$dbpassword");
+    mysql_select_db("$database", $db);
 
     $request = "SELECT * FROM `global_stats` ORDER BY `id` DESC LIMIT 0,1000";
     $result = mysql_query($request,$db);
@@ -17,8 +17,7 @@
       }
 	$min_time = min($time_raw);
 echo $min_time;
-//need to get a where statement to make the blocks only select when their timestamp is greater than $mintime  /\ IceyEC
-	$request = "SELECT * FROM `blocks` ORDER BY `id` DESC LIMIT 0,2";
+	$request = "SELECT * FROM blocks WHERE (`timestamp` >= ({$min_time})) ORDER BY `timestamp`";
     $result = mysql_query($request,$db);
     $blocks_raw=array();
 while($row = mysql_fetch_array($result))
