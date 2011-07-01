@@ -17,6 +17,7 @@
       }
 	$min_time = min($time_raw);
 echo $min_time;
+//need to get a where statement to make the blocks only select when their timestamp is greater than $mintime  /\ IceyEC
 	$request = "SELECT * FROM `blocks` ORDER BY `id` DESC LIMIT 0,2";
     $result = mysql_query($request,$db);
     $blocks_raw=array();
