@@ -9,7 +9,7 @@ $ch_global = curl_init( $json_url_global );
 $ch_personal = curl_init( $json_url_personal );
 $options = array(
 CURLOPT_RETURNTRANSFER => true,
-CURLOPT_HTTPHEADER => array('Content-ype: application/json')
+CURLOPT_HTTPHEADER => array('Content-type: application/json')
 );
 
 // Load strings from API
