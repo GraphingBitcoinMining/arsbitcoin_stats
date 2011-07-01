@@ -4,7 +4,7 @@
     $db = mysql_connect("localhost", "arsbtcstats", "password");
     mysql_select_db("arsbtcstats", $db);
 
-    $request = "SELECT * FROM `global_stats` ORDER BY `id` DESC LIMIT 0,100";
+    $request = "SELECT * FROM `global_stats` ORDER BY `id` DESC LIMIT 0,1000";
     $result = mysql_query($request,$db);
     $time_raw=array();
 	$hashrate_raw=array();
@@ -15,8 +15,17 @@
         $hashrate_raw[] = (int)$row["hashrate"]/1000;
 		$workers_raw[] = (int)$row["workers"];
       }
-	  
+	$min_time = min($time_raw);
+echo $min_time;
+	$request = "SELECT * FROM `blocks` ORDER BY `id` DESC LIMIT 0,2";
+    $result = mysql_query($request,$db);
+    $blocks_raw=array();
+while($row = mysql_fetch_array($result))
+      {
+        $blocks_raw[] = (int)$row["timestamp"]*1000;
+}
     //echo $row["time"];
+	$blocks = array_reverse($blocks_raw);
     $time = array_reverse($time_raw);
     $hashrate = array_reverse($hashrate_raw);
 	$workers = array_reverse($workers_raw);
@@ -35,9 +44,13 @@ $datapoints = json_encode($hasharray);
 function make_pair2($time, $workers) {
     return array($time, $workers);
 }
-
+function block_array($blocks) {
+	return array($blocks, 90);
+}
 $hasharray = array_map('make_pair2', $time, $workers);
 $datapoints2 = json_encode($hasharray);
+$hasharray = array_map('block_array', $blocks);
+$datapoints3 = json_encode($hasharray);
 if ($_GET[debug] == 1)
   {
     echo "Debug enabled!";

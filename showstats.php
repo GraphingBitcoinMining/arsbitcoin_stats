@@ -8,14 +8,16 @@
 include("global_stats.php");
 ?>
 <div id="placeholder" style="width:600px;height:300px"></div>
-	
+	<?php //echo $datapoints2; ?>
+<?php //echo $datapoints3; ?>
 	<script type="text/javascript">
 $(function () {
     var d1 = <?PHP echo $datapoints; ?>;
 	var d2 = <?PHP echo $datapoints2; ?>;
+	var d3 = <?PHP echo $datapoints3; ?>;
     
     var plot = $.plot($("#placeholder"),
-           [ { data: d1, label: "Hashrate (GH)", color: "<?php echo $hr_color; ?>"}, { data: d2, label: "Workers", color: "<?php echo $worker_color; ?>" } ], {
+           [ { data: d1, label: "Hashrate (GH)", color: "<?php if(isset($block)){echo "#000000";} else {echo $hr_color;} ?>"}, { data: d2, label: "Workers", color: "<?php echo $worker_color; ?>" } , { data: d3, label: "Block Found", color: "#000000"} ], {
                series: {
                    lines: { show: true },
                    points: { show: true }
@@ -26,7 +28,9 @@ $(function () {
 				 },
 				 yaxis: { max: <?php echo (max($workers) + 50); ?> , tickSize: 25},
                grid: { hoverable: true, clickable: true }
-             });
+             }
+
+);
 
     function showTooltip(x, y, contents) {
         $('<div id="tooltip">' + contents + '</div>').css( {
@@ -62,9 +66,12 @@ $(function () {
 					minutes = "0" + minutes
 					}
 					var datetime = hours  + ':' + minutes + '  ' + month + '/' + day;
-				
+					if (item.series.label != "Block Found") {
+						var content = "<center>" + item.series.label +" at <br>" + datetime + " =<br>" + y + "</center>";}
+					else {
+						var content = "<center>" + item.series.label +" at <br>" + datetime + "</center>"; }
 				showTooltip(item.pageX, item.pageY,
-							"<center>" + item.series.label +" at <br>" + datetime + " =<br>" + y + "</center>");
+							content);
 			}
 		}
             
