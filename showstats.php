@@ -5,6 +5,7 @@
 </head>
 <body>
 <?php
+error_reporting(E_ALL ^ E_NOTICE);
 include("global_stats.php");
 ?>
 <div id="placeholder" style="width:600px;height:300px"></div>

@@ -12,4 +12,6 @@ $query_global = mysql_query($sql_global);
 
 $sql_personal = "INSERT INTO `arsbtcstats`.`personal_stats` (`id`, `time`, `hashrate`, `confirmed_rewards`, `payout_history`) VALUES (NULL, '$now', '$hashrate_personal', '$confirmed_rewards', '$payout_history');";
 $query_personal = mysql_query($sql_personal);
+
+include("getblocks.php");
 ?>
