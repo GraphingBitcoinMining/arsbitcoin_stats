@@ -15,7 +15,7 @@
         $hashrate_raw[] = (int)$row["hashrate"]/1000;
 		$workers_raw[] = (int)$row["workers"];
       }
-	$min_time = min($time_raw);
+	$min_time = min($time_raw)/1000;
 echo $min_time;
 	$request = "SELECT * FROM blocks WHERE (`timestamp` >= ({$min_time})) ORDER BY `timestamp`";
     $result = mysql_query($request,$db);
