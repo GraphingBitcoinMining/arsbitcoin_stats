@@ -6,7 +6,6 @@ Arsbitcoin Statistics is a project which aim is to bring easily readable statist
 * Outputting saved data as JSON-encoded strings.
 * Displaying saved data as charts using the javascript library [Flot](http://code.google.com/p/flot/ "Flot").
 
-----
 
 ## Usage
 
@@ -14,11 +13,9 @@ The scripts are built up as three different components: _get_, _put_ and _show_.
 
 The _get_ component reads the data from the APIs and outputs them as plaintext or JSON. The _put_ component reads the data from _get_ (thus requiring the _get*.php_ file to be present) and stores these in a MySQL database (reference layout is specified in __Reference table layout__). The _show_ component reads the data from the MySQL database and outputs these to the [Flot](http://code.google.com/p/flot/ "Flot") and displays a chart based off of the data.
 
----
 
 ## Configuration
 
----
 
 ## Reference table layout
 
@@ -42,7 +39,6 @@ The _get_ component reads the data from the APIs and outputs them as plaintext o
 
 The reference table layout can be created by running *initialize_tables.sql*.
 
----
 
 ## Filelist
 
