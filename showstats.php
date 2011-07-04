@@ -30,11 +30,11 @@ $(function () {
 	var d3 = <?PHP echo $datapoints3; ?>;
     
     var plot = $.plot($("#placeholder"),
-           [ { data: d1, label: "Hashrate (GH)", color: "<?php if(isset($block)){echo "#000000";} else {echo $hr_color;} ?>"}, { data: d2, label: "Workers", color: "<?php echo $worker_color; ?>" } , { data: d3, bars: { show: true }, label: "Block Found", color: "#000000"} ], {
-               series: {
-                   lines: { show: true },
-                   points: { show: true }
-				},
+           [ 
+	{ data: d1, lines: { show: true }, points: { show: true }, label: "Hashrate (GH)", color: "<?php if(isset($block)){echo "#000000";} else {echo $hr_color;} ?>"}, 
+	{ data: d2, lines: { show: true }, points: { show: true }, label: "Workers", color: "<?php echo $worker_color; ?>" } , 
+	{ data: d3, bars: { show: true }, label: "Block Found", color: "#000000"} ], {
+               
 			   xaxis: {
 						mode: "time",
 						timeformat: "%H:%M<br>%m/%d"
