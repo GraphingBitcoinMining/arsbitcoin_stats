@@ -52,11 +52,11 @@ $hasharray = array_map('block_array', $blocks);
 $datapoints3 = json_encode($hasharray);
 if ($_GET[debug] == 1)
   {
-    echo "Debug enabled!";
+    echo "<h1>Debug enabled!</h1>";
     echo "<br>";
-    echo "regular array: ";
+    echo "<h2>Regular array (Time & Workers):</h2>";
     print_r($hasharray);
-    echo "<br>JSON encoded: ";
+    echo "<h2>JSON encoded:</h2>";
     print $datapoints;
     echo "<br>";
   }

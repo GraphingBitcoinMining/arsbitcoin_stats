@@ -9,6 +9,9 @@ error_reporting(E_ALL ^ E_NOTICE);
 include("global_stats.php");
 ?>
 <div id="placeholder" style="width:600px;height:300px"></div>
+<?php if ($donation_message == 1) {
+	echo $message;
+} ?>
 	<?php //echo $datapoints2; ?>
 <?php //echo $datapoints3; ?>
 	<script type="text/javascript">
