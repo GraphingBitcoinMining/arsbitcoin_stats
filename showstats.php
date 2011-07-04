@@ -8,7 +8,7 @@
 error_reporting(E_ALL ^ E_NOTICE);
 include("global_stats.php");
 ?>
-<div id="placeholder" style="width:600px;height:300px"></div>
+<center><div id="placeholder" style="width:80%;height:80%"></div></center>
 <?php if ($donation_message == 1) {
 	echo $message;
 } ?>
