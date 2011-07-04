@@ -30,7 +30,7 @@ $(function () {
 	var d3 = <?PHP echo $datapoints3; ?>;
     
     var plot = $.plot($("#placeholder"),
-           [ { data: d1, label: "Hashrate (GH)", color: "<?php if(isset($block)){echo "#000000";} else {echo $hr_color;} ?>"}, { data: d2, label: "Workers", color: "<?php echo $worker_color; ?>" } , { data: d3, label: "Block Found", color: "#000000"} ], {
+           [ { data: d1, label: "Hashrate (GH)", color: "<?php if(isset($block)){echo "#000000";} else {echo $hr_color;} ?>"}, { data: d2, label: "Workers", color: "<?php echo $worker_color; ?>" } , { data: d3, bars: { show: true }, label: "Block Found", color: "#000000"} ], {
                series: {
                    lines: { show: true },
                    points: { show: true }
@@ -39,7 +39,7 @@ $(function () {
 						mode: "time",
 						timeformat: "%H:%M<br>%m/%d"
 				 },
-				 yaxis: { max: <?php echo (max($workers) + 50); ?> , tickSize: 25},
+				 yaxis: { max: <?php echo (max($workers) + 50); ?> , min: 0, tickSize: 25},
                grid: { hoverable: true, clickable: true }
              }
 
