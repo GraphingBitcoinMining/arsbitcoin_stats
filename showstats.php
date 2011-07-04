@@ -1,7 +1,6 @@
 <head>
 <script type="text/javascript" src="./js/flot/jquery.js"></script>
 <script type="text/javascript" src="./js/flot/jquery.flot.js"></script>
-<script language="javascript" type="text/javascript" src="./js/flot/jquery.flot.resize.js"></script>
 <title>Stats</title>
 <style type="text/css">
     html, body {
@@ -92,8 +91,7 @@ $(function () {
             
         
     });
-
-  placeholder.resize(function () {});  
+ 
 });
 </script>
 </body>
