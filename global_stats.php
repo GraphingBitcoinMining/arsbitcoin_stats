@@ -14,8 +14,10 @@
         $time_raw[] = (int)$row["time"]*1000;
         $hashrate_raw[] = (int)$row["hashrate"]/1000;
 		$workers_raw[] = (int)$row["workers"];
+		$network_hashrate_raw[] = (float)$row["network_hashrate"];
       }
 	$min_time = min($time_raw)/1000;
+	
 	$request = "SELECT * FROM blocks WHERE (`timestamp` >= ({$min_time})) ORDER BY `timestamp`";
     $result = mysql_query($request,$db);
     $blocks_raw=array();
@@ -28,6 +30,7 @@ while($row = mysql_fetch_array($result))
     $time = array_reverse($time_raw);
     $hashrate = array_reverse($hashrate_raw);
 	$workers = array_reverse($workers_raw);
+	$network_rate = array_reverse($network_hashrate_raw);
 	//for ( $i = 0; $i < sizeof($time); $i++)
 	//{
 	//	$time[$i] = date("Y-m-d H:i:s", $time[$i]);
@@ -50,12 +53,7 @@ $hasharray = array_map('make_pair2', $time, $workers);
 $datapoints2 = json_encode($hasharray);
 $hasharray = array_map('block_array', $blocks);
 $datapoints3 = json_encode($hasharray);
-  //This is where we pull network hashrate
-$global_network = file_get_contents('http://bitcoincharts.com/markets/');
-$regex = '/Network total\<\/td\>\<td\>(.+?) Thash\/s\<\/td\>\<\/tr\>/';
-preg_match($regex,$global_network,$match);
-$network_hashrate = (float)$match[1] * 1000;
-$network_hashrate = $network_hashrate - (end($hashrate));
+$network_hashrate = end($network_rate) - (end($hashrate));
 if ($_GET[debug] == 1)
   {
     echo "<h1>Debug enabled!</h1>";

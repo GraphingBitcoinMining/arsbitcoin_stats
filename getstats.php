@@ -41,4 +41,11 @@ echo 'Confirmed rewards: '.$confirmed_rewards.'<br>';
 echo 'Personal hashrate: '.$hashrate_personal.'<br>';
 echo 'Payout history: '.$payout_history.'<br>';
 // End personal
+
+  //This is where we pull network hashrate
+$global_network = file_get_contents('http://bitcoincharts.com/markets/');
+$regex = '/Network total\<\/td\>\<td\>(.+?) Thash\/s\<\/td\>\<\/tr\>/';
+preg_match($regex,$global_network,$match);
+$network_hashrate = (float)$match[1] * 1000;
+echo $network_hashrate;
 ?>
