@@ -1,6 +1,7 @@
 ﻿<head>
 <script type="text/javascript" src="./js/flot/jquery.js"></script>
 <script type="text/javascript" src="./js/flot/jquery.flot.js"></script>
+<script language="javascript" type="text/javascript" src="./js/flot/jquery.flot.pie.js"></script>
 <title>Stats</title>
 <style type="text/css">
     html, body {
@@ -18,6 +19,8 @@
 include("global_stats.php");
 ?>
 <center><div id="placeholder" style="width:80%;height:80%"></div></center>
+
+<center><div id="network" style="width:25%;height:10%; float: left; margin-left: 175px;"></div></center>
 <?php if ($donation_message == 1) {
 	echo $message;
 } ?>
@@ -29,7 +32,19 @@ $(function () {
 	var d2 = <?PHP echo $datapoints2; ?>;
 	var d3 = <?PHP echo $datapoints3; ?>;
     
-    var plot = $.plot($("#placeholder"),
+	var data = [ { label: "Network Hashrate (<?PHP echo $network_hashrate; ?> GH)", data: <?PHP echo $network_hashrate; ?> },
+		{ label: "Pool Hashrate (<?PHP echo (end($hashrate)); ?> GH)", data: <?PHP echo (end($hashrate)); ?> } ];
+	$.plot($("#network"), data,
+{
+        series: {
+            pie: { 
+                show: true
+            }
+        }
+})
+
+
+    $.plot($("#placeholder"),
            [ 
 	{ data: d1, lines: { show: true }, points: { show: true }, label: "Hashrate (GH)", color: "<?php if(isset($block)){echo "#000000";} else {echo $hr_color;} ?>"}, 
 	{ data: d2, lines: { show: true }, points: { show: true }, label: "Workers", color: "<?php echo $worker_color; ?>" } , 

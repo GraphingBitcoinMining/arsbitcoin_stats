@@ -50,6 +50,12 @@ $hasharray = array_map('make_pair2', $time, $workers);
 $datapoints2 = json_encode($hasharray);
 $hasharray = array_map('block_array', $blocks);
 $datapoints3 = json_encode($hasharray);
+  //This is where we pull network hashrate
+$global_network = file_get_contents('http://bitcoincharts.com/markets/');
+$regex = '/Network total\<\/td\>\<td\>(.+?) Thash\/s\<\/td\>\<\/tr\>/';
+preg_match($regex,$global_network,$match);
+$network_hashrate = (float)$match[1] * 1000;
+$network_hashrate = $network_hashrate - (end($hashrate));
 if ($_GET[debug] == 1)
   {
     echo "<h1>Debug enabled!</h1>";
@@ -59,7 +65,10 @@ if ($_GET[debug] == 1)
     echo "<h2>JSON encoded:</h2>";
     print $datapoints;
     echo "<br>";
+	echo "<h2>Network Hashrate :</h2>".$network_hashrate." GH/s";
+	echo "<h2>Pool Hashrate :</h2>".(end($hashrate))." GH/s";
   }
+
 
 mysql_free_result($result);
     ?>
