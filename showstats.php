@@ -72,7 +72,7 @@ $(function () {
 					y = item.datapoint[1];
 					var time = new Date(x);
 					var month = time.getMonth() + 1;
-					var day = time.getDate() + 1;
+					var day = time.getDate();
 					var hours = time.getUTCHours();
 					var minutes = time.getMinutes() ;
 					if (minutes < 10){
