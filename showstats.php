@@ -11,6 +11,10 @@
         padding-left: 50px;
         font-size: smaller;
     }
+	#donation {
+		font-size: smaller;
+		color: #A9A9A9;
+	}
     </style>
 </head>
 <body>
