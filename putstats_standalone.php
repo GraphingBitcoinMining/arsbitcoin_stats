@@ -1,8 +1,8 @@
 <?php
 $now = time();
 $type = $_GET['type'];
-include("config.php")
-if(isset($_GET['api_key'])) $api_key = $_GET['api_key'];
+include("config.php");
+if(isset($_GET['api_key'])) { $api_key = $_GET['api_key']; }
 $db = mysql_connect($host,$dbuser,$dbpassword);
 mysql_select_db($database,$db);
 //$json_string='{"confirmed_rewards":"0.0585075","hashrate":"35","payout_history":"0.0585075","workers":{"Lego399.default":{"alive":"0","hashrate":"0"},"Lego399.laptop_2":{"alive":"0","hashrate":"0"},"Lego399.laptop2":{"alive":"1","hashrate":"21"},"Lego399.macmini":{"alive":"0","hashrate":"0"},"Lego399.laptop":{"alive":"1","hashrate":"14"}}}'
@@ -74,4 +74,6 @@ else
   $sql = "INSERT INTO `arsbtcstats`.`global_stats` (`id`, `time`, `hashrate`, `workers`) VALUES (NULL, '$now', '$hashrate', '$workers');";
   $query = mysql_query($sql);
 }
+
+include("getblocks.php");
 ?>

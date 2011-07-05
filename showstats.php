@@ -1,4 +1,4 @@
-<head>
+﻿<head>
 <script type="text/javascript" src="./js/flot/jquery.js"></script>
 <script type="text/javascript" src="./js/flot/jquery.flot.js"></script>
 <title>Stats</title>
@@ -14,7 +14,7 @@
 </head>
 <body>
 <?php
-error_reporting(E_ALL ^ E_NOTICE);
+//error_reporting(E_ALL ^ E_NOTICE);
 include("global_stats.php");
 ?>
 <center><div id="placeholder" style="width:80%;height:80%"></div></center>
