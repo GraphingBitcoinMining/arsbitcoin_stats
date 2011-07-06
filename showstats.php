@@ -1,4 +1,7 @@
-﻿<head>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<!--[if IE]><script language="javascript" type="text/javascript" src="./js/flot/excanvas.min.js"></script><![endif]-->
 <script type="text/javascript" src="./js/flot/jquery.js"></script>
 <script type="text/javascript" src="./js/flot/jquery.flot.js"></script>
 <script language="javascript" type="text/javascript" src="./js/flot/jquery.flot.pie.js"></script>
@@ -22,15 +25,16 @@
 //error_reporting(E_ALL ^ E_NOTICE);
 include("global_stats.php");
 ?>
-<center><div id="placeholder" style="width:80%;height:80%"></div></center>
+<center><div id="placeholder" style="width:800px;height:400px"></div></center>
 
-<center><div id="network" style="width:25%;height:10%; float: left; margin-left: 175px;"></div></center>
+<center><div id="network" style="width:350px;height:100px; float: left; margin-left: 225px;"></div></center>
 <?php if ($donation_message == 1) {
 	echo $message;
 } ?>
 	<?php //echo $datapoints2; ?>
 <?php //echo $datapoints3; ?>
 	<script type="text/javascript">
+	
 $(function () {
     var d1 = <?PHP echo $datapoints; ?>;
 	var d2 = <?PHP echo $datapoints2; ?>;
@@ -114,3 +118,4 @@ $(function () {
 });
 </script>
 </body>
+</html>

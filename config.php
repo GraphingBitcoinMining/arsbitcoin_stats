@@ -11,7 +11,7 @@ if you are willing to share the love with the developers of this app, leave $don
 
 $donation_message = 1;
 
-$message = "<center><p id='donation'>If you enjoyed these graphs, the developers would appreciate donations at: <br>1Pz3Rg38y2H3cRfvVyMCeVk8BHHLTXW7pM</p></center>";
+$message = "<center><p id='donation' style='float: right; margin-right: 225px;'>If you enjoyed these graphs, the developers would appreciate donations at: <br>1Pz3Rg38y2H3cRfvVyMCeVk8BHHLTXW7pM</p></center>";
 
 $hr_color = "#68FFFF"; // Hashrate Color
 $worker_color = "#00FF00"; // Worker Color

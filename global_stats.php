@@ -4,7 +4,7 @@
     $db = mysql_connect("$host", "$database", "$dbpassword");
     mysql_select_db("$database", $db);
 
-    $request = "SELECT * FROM `global_stats` ORDER BY `id` DESC LIMIT 0,1000";
+    $request = "SELECT * FROM `global_stats` ORDER BY `id` DESC LIMIT 0,500";
     $result = mysql_query($request,$db);
     $time_raw=array();
 	$hashrate_raw=array();
