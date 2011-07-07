@@ -25,8 +25,7 @@
 //error_reporting(E_ALL ^ E_NOTICE);
 include("global_stats.php");
 ?>
-<center><div id="placeholder" style="width:800px;height:400px"></div></center>
-
+<center><div id="placeholder" style="width:800px;height:300px"></div></center>
 <center><div id="network" style="width:350px;height:100px; float: left; margin-left: 225px;"></div></center>
 <?php if ($donation_message == 1) {
 	echo $message;
@@ -40,22 +39,26 @@ $(function () {
 	var d2 = <?PHP echo $datapoints2; ?>;
 	var d3 = <?PHP echo $datapoints3; ?>;
     
-	var data = [ { label: "Network Hashrate (<?PHP echo $network_hashrate; ?> GH)", data: <?PHP echo $network_hashrate; ?> },
-		{ label: "Pool Hashrate (<?PHP echo (end($hashrate)); ?> GH)", data: <?PHP echo (end($hashrate)); ?> } ];
+	var data = [ { label: "Network Hashrate (<?PHP echo $network_hashrate; ?> GH)", data: <?PHP echo $network_hashrate; ?>, color: "#ffcc00" },
+		{ label: "Pool Hashrate (<?PHP echo (end($hashrate)); ?> GH)", data: <?PHP echo (end($hashrate)); ?> , color: "<?php {echo $hr_color;} ?>"} ];
 	$.plot($("#network"), data,
 {
         series: {
             pie: { 
-                show: true
-            }
+                show: true,
+				stroke: { width: .1 }	
+            },
+			
         }
+		
+		
 })
 
 
     $.plot($("#placeholder"),
            [ 
-	{ data: d1, lines: { show: true }, points: { show: true }, label: "Hashrate (GH)", color: "<?php if(isset($block)){echo "#000000";} else {echo $hr_color;} ?>"}, 
-	{ data: d2, lines: { show: true }, points: { show: true }, label: "Workers", color: "<?php echo $worker_color; ?>" } , 
+	{ data: d1, lines: { show: true }, points: { show: false }, label: "Hashrate (GH)", color: "<?php {echo $hr_color;} ?>"}, 
+	{ data: d2, lines: { show: true }, points: { show: false }, label: "Workers", color: "<?php echo $worker_color; ?>" } , 
 	{ data: d3, bars: { show: true }, label: "Block Found", color: "#000000"} ], {
                
 			   xaxis: {
@@ -63,7 +66,7 @@ $(function () {
 						timeformat: "%H:%M<br>%m/%d"
 				 },
 				 yaxis: { max: <?php echo (max($workers) + 50); ?> , min: 0, tickSize: 25},
-               grid: { hoverable: true, clickable: true }
+               grid: { hoverable: true}
              }
 
 );
@@ -80,11 +83,13 @@ $(function () {
             opacity: 0.80
         }).appendTo("body").fadeIn(200);
     }
+	
 
     var previousPoint = null;
     $("#placeholder").bind("plothover", function (event, pos, item) {
         $("#x").text(pos.x.toFixed(2));
         $("#y").text(pos.y.toFixed(2));
+		
        
 		if (item) {
 			if (previousPoint != item.dataIndex) {
@@ -111,6 +116,10 @@ $(function () {
 							content);
 			}
 		}
+		else {
+                $("#tooltip").remove();
+                previousPoint = null;            
+            }
             
         
     });

@@ -2,21 +2,22 @@
 $now = time();
 include("config.php");
 if(isset($_GET['api_key'])) $api_key = $_GET['api_key'];
-$json_url_global = 'http://arsbitcoin.com/api.php';
-$json_url_personal = 'http://arsbitcoin.com/api.php?api_key='.$api_key;
+$json_url_global = 'https://arsbitcoin.com/api.php';
+$json_url_personal = 'https://arsbitcoin.com/api.php?api_key='.$api_key;
 
 $ch_global = curl_init( $json_url_global );
 $ch_personal = curl_init( $json_url_personal );
 $options = array(
 CURLOPT_RETURNTRANSFER => true,
-CURLOPT_HTTPHEADER => array('Content-type: application/json')
+CURLOPT_HTTPHEADER => array('Content-type: application/json'),
+CURLOPT_SSL_VERIFYPEER =>false
 );
-
 // Load strings from API
 // global
 curl_setopt_array( $ch_global, $options );
+//var_dump($ch_global);
 $json_string_global = curl_exec($ch_global);
-
+//var_dump($json_string_global);
 //personal
 curl_setopt_array( $ch_personal, $options );
 $json_string_personal = curl_exec($ch_personal);
