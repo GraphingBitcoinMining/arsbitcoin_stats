@@ -1,4 +1,26 @@
-<?php
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<!--[if IE]><script language="javascript" type="text/javascript" src="./js/flot/excanvas.min.js"></script><![endif]-->
+<script type="text/javascript" src="./js/flot/jquery.js"></script>
+<script type="text/javascript" src="./js/flot/jquery.flot.js"></script>
+<script language="javascript" type="text/javascript" src="./js/flot/jquery.flot.pie.js"></script>
+<title>Stats</title>
+<style type="text/css">
+    html, body {
+        height: 100%; /* make the percentage height on placeholder work */
+    }
+    .message {
+        padding-left: 50px;
+        font-size: smaller;
+    }
+	#donation {
+		font-size: smaller;
+		color: #A9A9A9;
+	}
+    </style>
+</head>
+<body><?php
     $debug = $_GET['debug'];
     include("config.php");
     $db = mysql_connect("$host", "$dbuser", "$dbpassword");
@@ -31,13 +53,12 @@ $datapoints = json_encode($hasharray);
 
 if ($_GET[debug] == 1)
   {
-    echo "Debug enabled!";
+    echo "<h1>Debug enabled!</h1>";
     echo "<br>";
-    echo "regular array: ";
+    echo "<h2>Regular array (Time & Workers):</h2>";
     print_r($hasharray);
-    echo "<br>JSON encoded: ";
+    echo "<h2>JSON encoded:</h2>";
     print $datapoints;
-    echo "<br>";
   }
 
 mysql_free_result($result);

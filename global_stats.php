@@ -46,8 +46,9 @@ $datapoints = json_encode($hasharray);
 function make_pair2($time, $workers) {
     return array($time, $workers);
 }
+
 function block_array($blocks) {
-	return array($blocks, 1000);
+	return array($blocks, 5000);
 }
 $hasharray = array_map('make_pair2', $time, $workers);
 $datapoints2 = json_encode($hasharray);

@@ -22,113 +22,12 @@
 </head>
 <body>
 <?php
-//error_reporting(E_ALL ^ E_NOTICE);
-include("global_stats.php");
-?>
-<center><div id="placeholder" style="width:800px;height:300px"></div></center>
-<center><div id="network" style="width:350px;height:100px; float: left; margin-left: 225px;"></div></center>
-<?php if ($donation_message == 1) {
-	echo $message;
-} ?>
-	<?php //echo $datapoints2; ?>
-<?php //echo $datapoints3; ?>
-	<script type="text/javascript">
-	
-$(function () {
-    var d1 = <?PHP echo $datapoints; ?>;
-	var d2 = <?PHP echo $datapoints2; ?>;
-	var d3 = <?PHP echo $datapoints3; ?>;
-    
-	var data = [ { label: "Network Hashrate (<?PHP echo $network_hashrate; ?> GH)", data: <?PHP echo $network_hashrate; ?>, color: "#ffcc00" },
-		{ label: "Pool Hashrate (<?PHP echo (end($hashrate)); ?> GH)", data: <?PHP echo (end($hashrate)); ?> , color: "<?php {echo $hr_color;} ?>"} ];
-	$.plot($("#network"), data,
-{
-        series: {
-            pie: { 
-                show: true,
-				stroke: { width: .1 }	
-            },
-			
-        }
-		
-		
-})
+    $debug = $_GET['debug'];
+    include("config.php");
+    $db = mysql_connect("$host", "$dbuser", "$dbpassword");
+    mysql_select_db("$database", $db);
 
-
-    $.plot($("#placeholder"),
-           [ 
-	{ data: d1, lines: { show: true }, points: { show: false }, label: "Hashrate (GH)", color: "<?php {echo $hr_color;} ?>"}, 
-	{ data: d2, lines: { show: true }, points: { show: false }, label: "Workers", color: "<?php echo $worker_color; ?>" } , 
-	{ data: d3, bars: { show: true }, label: "Block Found", color: "#000000"} ], {
-               
-			   xaxis: {
-						mode: "time",
-						timeformat: "%H:%M<br>%m/%d"
-				 },
-				 yaxis: { max: <?php echo (max($workers) + 50); ?> , min: 0, tickSize: 25},
-               grid: { hoverable: true},
-			   legend: { position: 'nw' }
-             }
-
-);
-
-    function showTooltip(x, y, contents) {
-        $('<div id="tooltip">' + contents + '</div>').css( {
-            position: 'absolute',
-            display: 'none',
-            top: y + 5,
-            left: x + 5,
-            border: '1px solid #fdd',
-            padding: '2px',
-            'background-color': '#fee',
-            opacity: 0.80
-        }).appendTo("body").fadeIn(200);
-    }
-	
-
-    var previousPoint = null;
-    $("#placeholder").bind("plothover", function (event, pos, item) {
-        $("#x").text(pos.x.toFixed(2));
-        $("#y").text(pos.y.toFixed(2));
-		
-       
-		if (item) {
-			if (previousPoint != item.dataIndex) {
-				previousPoint = item.dataIndex;
-				
-				$("#tooltip").remove();
-				var x = item.datapoint[0],
-					y = item.datapoint[1];
-					var time = new Date(x);
-					var month = time.getMonth() + 1;
-					var day = time.getDate();
-					var hours = time.getUTCHours();
-					var minutes = time.getMinutes() ;
-					if (minutes < 10){
-					minutes = "0" + minutes
-					}
-					var datetime = hours  + ':' + minutes + '  ' + month + '/' + day;
-					if (item.series.label != "Block Found") {
-						var content = "<center>" + item.series.label +" at <br>" + datetime + " =<br>" + y + "</center>";}
-					else {
-						var content = "<center>" + item.series.label +" at <br>" + datetime + "</center>"; }
-
-				showTooltip(item.pageX, item.pageY,
-							content);
-			}
-		}
-		else {
-                $("#tooltip").remove();
-                previousPoint = null;            
-            }
-            
-        
-    });
- 
-});
-</script>
-<?php
-   $request = "SELECT * FROM `global_stats` ORDER BY `id` DESC";
+    $request = "SELECT * FROM `global_stats` ORDER BY `id` DESC";
     $result = mysql_query($request,$db);
     $time_raw=array();
 	$hashrate_raw=array();
@@ -138,9 +37,17 @@ $(function () {
         $hashrate_raw[] = (int)$row["hashrate"]/1000;
       }
 	  
+    //echo $row["time"];
     $time = array_reverse($time_raw);
     $hashrate = array_reverse($hashrate_raw);
-
+	//for ( $i = 0; $i < sizeof($time); $i++)
+	//{
+	//	$time[$i] = date("Y-m-d H:i:s", $time[$i]);
+	//}
+	
+function make_pair($time, $hashrate) {
+    return array($time, $hashrate);
+}
 
 $hasharray = array_map('make_pair', $time, $hashrate);
 $datapoints = json_encode($hasharray);
@@ -157,7 +64,6 @@ if ($_GET[debug] == 1)
 
 mysql_free_result($result);
     ?>
-	<br><br><br><br><br><br><hr>
 	<center>
 	<h4>Daily</h4>
 	<div id="day" style="width:90%;height:200px"></div>
@@ -238,6 +144,3 @@ $(function () {
     
 });
 </script>
-
-</body>
-</html>
