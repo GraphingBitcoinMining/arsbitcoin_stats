@@ -1,6 +1,6 @@
 <?php
 include("config.php");
-$json_url = 'http://arsbitcoin.com/blockApi.php';
+$json_url = 'https://arsbitcoin.com/blockApi.php';
 
 $db = mysql_connect($host,$dbuser,$dbpassword);
 mysql_select_db($database,$db);
@@ -21,7 +21,8 @@ mysql_select_db($database,$db);
 $ch = curl_init($json_url);
 $options = array(
   CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_HTTPHEADER => array('Content-type: application/json')
+  CURLOPT_HTTPHEADER => array('Content-type: application/json'),
+CURLOPT_SSL_VERIFYPEER =>false
 );
 
 curl_setopt_array( $ch, $options );

@@ -186,7 +186,8 @@ $(function () {
 						timeformat: "%H:%M<br>%m/%d"
 				 },
 				 yaxis: { min: 0 , max: <?php echo (max($hashrate) + 5); ?> , tickSize: 10},
-               grid: { hoverable: false}
+               grid: { hoverable: false},
+			   legend: { position: 'sw' }
              });
 
     $.plot($("#week"),
@@ -201,7 +202,8 @@ $(function () {
 						timeformat: "%m/%d"
 				 },
 				 yaxis: { min: 0 , max: <?php echo (max($hashrate) + 5); ?> , tickSize: 10},
-               grid: { hoverable: false }
+               grid: { hoverable: false },
+			   legend: { position: 'sw' }
              });
 
     $.plot($("#month"),
@@ -216,7 +218,8 @@ $(function () {
 						timeformat: "%m/%d"
 				 },
 				 yaxis: { min: 0 , max: <?php echo (max($hashrate) + 5); ?> , tickSize: 10},
-               grid: { hoverable: false }
+               grid: { hoverable: false },
+			   legend: { position: 'sw' }
              });
 			 
     $.plot($("#year"),
@@ -231,7 +234,8 @@ $(function () {
 						timeformat: "%m/%d"
 				 },
 				 yaxis: { min: 0 , max: <?php echo (max($hashrate) + 5); ?> , tickSize: 10},
-               grid: { hoverable: false }
+               grid: { hoverable: false },
+			   legend: { position: 'sw' }
              });
 
 
