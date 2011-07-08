@@ -23,11 +23,33 @@
 <body>
 <?php
 //error_reporting(E_ALL ^ E_NOTICE);
+if ($cache == 0){
 include("global_stats.php");
+}
+if ($cache == 1){
+include("memcached.php");
+}
 ?>
 <center><div style="width: 95%;"><div id="placeholder" style="width:800px;height:300px"></div>
 <div id="network" style="width:350px;height:100px;"></div>
 </div></center>
+
+	<hr>
+	<center><div style="width: 95%;">
+	<h4>Daily</h4>
+	<div id="day" style="width:90%;height:200px"></div>
+	<h4>Weekly</h4>
+	<div id="week" style="width:90%;height:200px"></div>
+	<h4>Monthly</h4>
+	<div id="month" style="width:90%;height:200px"></div>
+	<h4>Anually</h4>
+	<div id="year" style="width:90%;height:200px"></div>
+	</div>
+	<?php if ($donation_message == 1) {
+	echo $message;
+} ?></center>
+
+
 	<?php //echo $datapoints2; ?>
 <?php //echo $datapoints3; ?>
 	<script type="text/javascript">
@@ -125,53 +147,10 @@ $(function () {
  
 });
 </script>
-<?php
-   $request = "SELECT * FROM `global_stats` ORDER BY `id` DESC";
-    $result = mysql_query($request,$db);
-    $time_raw=array();
-	$hashrate_raw=array();
-   while($row = mysql_fetch_array($result))
-      {
-        $time_raw[] = (int)$row["time"]*1000;
-        $hashrate_raw[] = (int)$row["hashrate"]/1000;
-      }
-	  
-    $time = array_reverse($time_raw);
-    $hashrate = array_reverse($hashrate_raw);
 
-
-$hasharray = array_map('make_pair', $time, $hashrate);
-$datapoints = json_encode($hasharray);
-
-if ($_GET[debug] == 1)
-  {
-    echo "<h1>Debug enabled!</h1>";
-    echo "<br>";
-    echo "<h2>Regular array (Time & Workers):</h2>";
-    print_r($hasharray);
-    echo "<h2>JSON encoded:</h2>";
-    print $datapoints;
-  }
-
-mysql_free_result($result);
-    ?>
-	<hr>
-	<center><div style="width: 95%;">
-	<h4>Daily</h4>
-	<div id="day" style="width:90%;height:200px"></div>
-	<h4>Weekly</h4>
-	<div id="week" style="width:90%;height:200px"></div>
-	<h4>Monthly</h4>
-	<div id="month" style="width:90%;height:200px"></div>
-	<h4>Anually</h4>
-	<div id="year" style="width:90%;height:200px"></div>
-	</div>
-	<?php if ($donation_message == 1) {
-	echo $message;
-} ?></center>
 	<script type="text/javascript">
 $(function () {
-    var d1 = <?PHP echo $datapoints; ?>;
+    var d1 = <?PHP echo $datapoints4; ?>;
 
 
     $.plot($("#day"),

@@ -68,6 +68,32 @@ if ($_GET[debug] == 1)
 	echo "<h2>Pool Hashrate :</h2>".(end($hashrate))." GH/s";
   }
 
+  $request = "SELECT * FROM `global_stats` ORDER BY `id` DESC";
+    $result = mysql_query($request,$db);
+    $time_raw=array();
+	$hashrate_raw=array();
+   while($row = mysql_fetch_array($result))
+      {
+        $time_raw[] = (int)$row["time"]*1000;
+        $hashrate_raw[] = (int)$row["hashrate"]/1000;
+      }
+	  
+    $time = array_reverse($time_raw);
+    $hashrate = array_reverse($hashrate_raw);
+
+
+$hasharray = array_map('make_pair', $time, $hashrate);
+$datapoints4 = json_encode($hasharray);
+
+if ($_GET[debug] == 1)
+  {
+    echo "<h1>Debug enabled!</h1>";
+    echo "<br>";
+    echo "<h2>Regular array (Time & Workers):</h2>";
+    print_r($hasharray);
+    echo "<h2>JSON encoded:</h2>";
+    print $datapoints4;
+  }
 
 mysql_free_result($result);
     ?>
