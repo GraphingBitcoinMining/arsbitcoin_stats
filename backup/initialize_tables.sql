@@ -37,7 +37,7 @@ CREATE TABLE `global_stats` (
   `time` int(11) NOT NULL,
   `hashrate` int(11) NOT NULL,
   `workers` int(11) NOT NULL,
-  `network_hashrate` int(11) NOT NULL, 
+  `network_hashrate` int(11) not null, 
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=208 DEFAULT CHARSET=latin1;
 

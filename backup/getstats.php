@@ -17,10 +17,6 @@ CURLOPT_SSL_VERIFYPEER =>false
 curl_setopt_array( $ch_global, $options );
 //var_dump($ch_global);
 $json_string_global = curl_exec($ch_global);
-if ($json_string_global == null) {
-	sleep(15);
-	$json_string_global = curl_exec($ch_global);
-}
 //var_dump($json_string_global);
 //personal
 curl_setopt_array( $ch_personal, $options );

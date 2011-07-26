@@ -23,20 +23,13 @@
 <body>
 <?php
 //error_reporting(E_ALL ^ E_NOTICE);
-//echo "including config.php<br><br>";
-include("config.php");
-
 if ($cache == 0){
-//echo "including global stats<br><br>";
 include("global_stats.php");
 }
 if ($cache == 1){
-//echo "including memcached.php<br><br>";
 include("memcached.php");
 }
 ?>
-
-
 <center><div style="width: 95%;"><div id="placeholder" style="width:800px;height:300px"></div>
 <div id="network" style="width:350px;height:100px;"></div>
 </div></center>
@@ -65,10 +58,9 @@ $(function () {
     var d1 = <?PHP echo $datapoints; ?>;
 	var d2 = <?PHP echo $datapoints2; ?>;
 	var d3 = <?PHP echo $datapoints3; ?>;
-	
+    
 	var data = [ { label: "Network Hashrate (<?PHP echo $network_hashrate; ?> GH)", data: <?PHP echo $network_hashrate; ?>, color: "#ffcc00" },
-		{ label: "Pool Hashrate (<?PHP echo $hashrate; ?> GH)", data: <?PHP echo $hashrate; ?> , color: "<?php {echo $hr_color;} ?>"} ];
-	
+		{ label: "Pool Hashrate (<?PHP echo (end($hashrate)); ?> GH)", data: <?PHP echo (end($hashrate)); ?> , color: "<?php {echo $hr_color;} ?>"} ];
 	$.plot($("#network"), data,
 {
         series: {
@@ -80,7 +72,7 @@ $(function () {
         }
 		
 		
-});
+})
 
 
     $.plot($("#placeholder"),
@@ -90,78 +82,15 @@ $(function () {
 	{ data: d3, bars: { show: true }, label: "Block Found", color: "#000000"} ], {
                
 			   xaxis: {
-						min: <?PHP echo (time() - 345600)*1000; ?>,
 						mode: "time",
 						timeformat: "%H:%M<br>%m/%d"
 				 },
-				 yaxis: { max: <?php echo $y_max; ?>, min: 0},
+				 yaxis: { max: <?php echo (max($workers) + 50); ?> , min: 0, tickSize: 25},
                grid: { hoverable: true},
 			   legend: { position: 'nw' }
-             });
-			 
-	$.plot($("#day"),
-           [ { data: d1, label: "Hashrate (GH)", color: "<?php echo $hr_color; ?>"} ], {
-               series: {
-                   lines: { show: true },
-                   points: { show: false }
-				},
-			   xaxis: {
-						min: <?PHP echo (time() - 86400)*1000; ?>,
-						mode: "time",
-						timeformat: "%H:%M<br>%m/%d"
-				 },
-				 yaxis: { min: 0},
-               grid: { hoverable: false},
-			   legend: { position: 'sw' }
-             });
+             }
 
-    $.plot($("#week"),
-           [ { data: d1, label: "Hashrate (GH)", color: "<?php echo $hr_color; ?>"} ], {
-               series: {
-                   lines: { show: true },
-                   points: { show: false }
-				},
-			   xaxis: {
-						min: <?PHP echo (time() - 604800)*1000; ?>,
-						mode: "time",
-						timeformat: "%m/%d"
-				 },
-				 yaxis: { min: 0},
-               grid: { hoverable: false },
-			   legend: { position: 'sw' }
-             });
-
-    $.plot($("#month"),
-           [ { data: d1, label: "Hashrate (GH)", color: "<?php echo $hr_color; ?>"} ], {
-               series: {
-                   lines: { show: true },
-                   points: { show: false }
-				},
-			   xaxis: {
-						min: <?PHP echo (time() - 2629743)*1000; ?>,
-						mode: "time",
-						timeformat: "%m/%d"
-				 },
-				 yaxis: { min: 0},
-               grid: { hoverable: false },
-			   legend: { position: 'sw' }
-             });
-			 
-    $.plot($("#year"),
-           [ { data: d1, label: "Hashrate (GH)", color: "<?php echo $hr_color; ?>"} ], {
-               series: {
-                   lines: { show: true },
-                   points: { show: false }
-				},
-			   xaxis: {
-						min: <?PHP echo (time() - 31556926)*1000; ?>,
-						mode: "time",
-						timeformat: "%m/%d"
-				 },
-				 yaxis: { min: 0 },
-               grid: { hoverable: false },
-			   legend: { position: 'sw' }
-             });
+);
 
     function showTooltip(x, y, contents) {
         $('<div id="tooltip">' + contents + '</div>').css( {
@@ -219,6 +148,79 @@ $(function () {
 });
 </script>
 
+	<script type="text/javascript">
+$(function () {
+    var d1 = <?PHP echo $datapoints; ?>;
+
+
+    $.plot($("#day"),
+           [ { data: d1, label: "Hashrate (GH)", color: "<?php echo $hr_color; ?>"} ], {
+               series: {
+                   lines: { show: true },
+                   points: { show: false }
+				},
+			   xaxis: {
+						min: <?PHP echo (time() - 86400)*1000; ?>,
+						mode: "time",
+						timeformat: "%H:%M<br>%m/%d"
+				 },
+				 yaxis: { min: 0 , max: <?php echo (max($hashrate) + 5); ?> , tickSize: 10},
+               grid: { hoverable: false},
+			   legend: { position: 'sw' }
+             });
+
+    $.plot($("#week"),
+           [ { data: d1, label: "Hashrate (GH)", color: "<?php echo $hr_color; ?>"} ], {
+               series: {
+                   lines: { show: true },
+                   points: { show: false }
+				},
+			   xaxis: {
+						min: <?PHP echo (time() - 604800)*1000; ?>,
+						mode: "time",
+						timeformat: "%m/%d"
+				 },
+				 yaxis: { min: 0 , max: <?php echo (max($hashrate) + 5); ?> , tickSize: 10},
+               grid: { hoverable: false },
+			   legend: { position: 'sw' }
+             });
+
+    $.plot($("#month"),
+           [ { data: d1, label: "Hashrate (GH)", color: "<?php echo $hr_color; ?>"} ], {
+               series: {
+                   lines: { show: true },
+                   points: { show: false }
+				},
+			   xaxis: {
+						min: <?PHP echo (time() - 2629743)*1000; ?>,
+						mode: "time",
+						timeformat: "%m/%d"
+				 },
+				 yaxis: { min: 0 , max: <?php echo (max($hashrate) + 5); ?> , tickSize: 10},
+               grid: { hoverable: false },
+			   legend: { position: 'sw' }
+             });
+			 
+    $.plot($("#year"),
+           [ { data: d1, label: "Hashrate (GH)", color: "<?php echo $hr_color; ?>"} ], {
+               series: {
+                   lines: { show: true },
+                   points: { show: false }
+				},
+			   xaxis: {
+						min: <?PHP echo (time() - 31556926)*1000; ?>,
+						mode: "time",
+						timeformat: "%m/%d"
+				 },
+				 yaxis: { min: 0 , max: <?php echo (max($hashrate) + 5); ?> , tickSize: 10},
+               grid: { hoverable: false },
+			   legend: { position: 'sw' }
+             });
+
+
+    
+});
+</script>
 
 </body>
 </html>
