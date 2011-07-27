@@ -85,8 +85,9 @@
 			
 			//echo "<br>Checking cache for blocks<br><br>";
 				$data = $memcache->get('blocks');
+				$valuesmemcached = 1;
 				if (!$data) {
-				//echo "<br><br>Not Memcached<br><br>";
+				$valuesmemcached = 0;
 				$data = array();
 				//echo"running query for blocks<br><br>";
 				$min_time = time() - 345600;
