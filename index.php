@@ -90,10 +90,11 @@ $(function () {
 
     $.plot($("#placeholder"),
            [ 
-	{ data: d1, lines: { show: true }, points: { show: false }, label: "Hashrate (GH)", color: "<?php {echo $hr_color;} ?>"}, 
-	{ data: buffer, lines: { show: true }, points: { show: false }, label: "SMPPS Buffer"},
-	{ data: d2, lines: { show: true }, points: { show: false }, label: "Workers", color: "<?php echo $worker_color; ?>" } , 
-	{ data: d3, bars: { show: true }, label: "Block Found", color: "#000000"} ], {
+			{ data: d1, lines: { show: true }, points: { show: false }, label: "Hashrate (GH)", color: "<?php {echo $hr_color;} ?>"}, 
+			{ data: buffer, lines: { show: true }, points: { show: false }, label: "SMPPS Buffer"},
+			{ data: d2, lines: { show: true }, points: { show: false }, label: "Workers", color: "<?php echo $worker_color; ?>" } , 
+			{ data: d3, bars: { show: true }, label: "Block Found", color: "#000000"}
+		], {
                
 			   xaxis: {
 						min: <?PHP echo (time() - 345600)*1000; ?>,

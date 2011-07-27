@@ -56,10 +56,11 @@
 							$hashrate = array_reverse($hashrate_raw);
 							$hashrate2 = end($hashrate);
 							$workers = array_reverse($workers_raw);
-							$y_max = max($workers) +50;
+							
 							$network_rate = array_reverse($network_hashrate_raw);
 							
 							$buffer = array_reverse($buffer_raw);
+							$y_max = max($buffer) +50;
 							//get hashrate
 							$network_rate = end($network_rate);
 							$hasharray = array_map('make_pair', $time, $hashrate);
@@ -123,6 +124,7 @@ $datapoints2 = $result['2'];
 $network_rate = $result['3'];
 $last_hashrate = $result['4'];
 $y_max = $result['5'];
+echo $buffer;
 $buffer = $result['6'];
 //echo $datapoints2;
 //echo "<br><br>Hashrate Result: <br>";
