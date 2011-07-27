@@ -50,15 +50,9 @@ include("memcached.php");
 	<h4>Anually</h4>
 	<div id="year" style="width:90%;height:200px"></div>
 	</div>
-	<?php if ($enable_donation_message == 1) {
-	  echo $donation_message;
-  }
-  if ($enable_memcache_message == 1) {
-    if ($valuesmemcached == 1) {
-        echo $memcache_message;
-    }
-  }
-  ?></center>
+	<?php if ($donation_message == 1) {
+	echo $message;
+} ?></center>
 
 
 	<?php //echo $datapoints2; ?>
