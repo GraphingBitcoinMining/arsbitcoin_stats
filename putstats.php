@@ -15,7 +15,7 @@ $timestamp = $row[0];
 echo $timestamp;
 //This lets us run get more current stats if the api drops for some reason
 
-if ($timestamp+600 <= $now) {
+if ($timestamp+300 <= $now) {
 
 	if(isset($_GET['api_key'])) $api_key = $_GET['api_key'];
 	require_once('getstats.php');
@@ -24,7 +24,7 @@ if ($timestamp+600 <= $now) {
 	//$sql_global = "INSERT INTO `arsbtcstats`.`global_stats` (`id`, `time`, `hashrate`, `workers`) VALUES (NULL, '$now', '$hashrate_global', '$workers');";
 	//$query_global = mysql_query($sql_global);
 
-	$sql_global = "INSERT INTO `arsbtcstats`.`global_stats` (`id`, `time`, `hashrate`, `workers`, `network_hashrate`) VALUES (NULL, '$now', '$hashrate_global', '$workers', '$network_hashrate');";
+	$sql_global = "INSERT INTO `arsbtcstats`.`global_stats` (`id`, `time`, `hashrate`, `workers`, `network_hashrate`, `buffer`) VALUES (NULL, '$now', '$hashrate_global', '$workers', '$network_hashrate', '$buffer');";
 	$query_global = mysql_query($sql_global);
 
 	$sql_personal = "INSERT INTO `arsbtcstats`.`personal_stats` (`id`, `time`, `hashrate`, `confirmed_rewards`, `payout_history`) VALUES (NULL, '$now', '$hashrate_personal', '$confirmed_rewards', '$payout_history');";

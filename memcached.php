@@ -20,6 +20,10 @@
 	function block_array($blocks) {
 		return array($blocks, 5000);
 	}
+	
+	function make_buffer_pair($time, $buffer) {
+	return array($time, $buffer);
+}
 	function get_datapoints($query) {
 
 		include("config.php");
@@ -29,7 +33,7 @@
 		mysql_select_db($database,$db);
 		/* first try the cache */
 		
-		$expire = 600;
+		$expire = 300;
 			if ($query == 'hashrate') { // $datapoints1
 			//echo "Checking cache for hashrate<br><br>";
 				$data = $memcache->get('hashrate');
@@ -46,6 +50,7 @@
 							$hashrate_raw[] = (float)$row["hashrate"]/1000;
 							$workers_raw[] = (float)$row["workers"];
 							$network_hashrate_raw[] = (float)$row["network_hashrate"];
+							$buffer_raw[] = (float)$row["buffer"];
 						  }
 							$time = array_reverse($time_raw);
 							$hashrate = array_reverse($hashrate_raw);
@@ -53,6 +58,8 @@
 							$workers = array_reverse($workers_raw);
 							$y_max = max($workers) +50;
 							$network_rate = array_reverse($network_hashrate_raw);
+							
+							$buffer = array_reverse($buffer_raw);
 							//get hashrate
 							$network_rate = end($network_rate);
 							$hasharray = array_map('make_pair', $time, $hashrate);
@@ -61,8 +68,12 @@
 							//get workers
 							$hasharray = array_map('make_pair2', $time, $workers);
 							$datapoints2 = json_encode($hasharray);
+							
+							
+							$buffer_array = array_map('make_buffer_pair', $time, $buffer);
+							$buffer = json_encode($buffer_array);
 							//var_dump($datapoints2);
-							$data = array('1'=>$datapoints,'2'=>$datapoints2,'3'=>$network_rate,'4'=>$hashrate2,'5'=>$y_max);
+							$data = array('1'=>$datapoints,'2'=>$datapoints2,'3'=>$network_rate,'4'=>$hashrate2,'5'=>$y_max,'6'=>$buffer);
 					//var_dump($data);
 					$memcache->set('hashrate', $data, 0, $expire ) or die ("Failed to save data at the server");
 				}
@@ -111,6 +122,7 @@ $datapoints2 = $result['2'];
 $network_rate = $result['3'];
 $last_hashrate = $result['4'];
 $y_max = $result['5'];
+$buffer = $result['6'];
 //echo $datapoints2;
 //echo "<br><br>Hashrate Result: <br>";
        // var_dump($result);

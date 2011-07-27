@@ -15,6 +15,7 @@
         $hashrate_raw[] = (int)$row["hashrate"]/1000;
 		$workers_raw[] = (int)$row["workers"];
 		$network_hashrate_raw[] = (float)$row["network_hashrate"];
+		$buffer_raw[] = (float)$row["buffer"];
       }
 	$min_time = min($time_raw)/1000;
 	
@@ -31,6 +32,7 @@ while($row = mysql_fetch_array($result))
     $hashrate = array_reverse($hashrate_raw);
 	$workers = array_reverse($workers_raw);
 	$network_rate = array_reverse($network_hashrate_raw);
+	$buffer = array_reverse($buffer_raw);
 	//for ( $i = 0; $i < sizeof($time); $i++)
 	//{
 	//	$time[$i] = date("Y-m-d H:i:s", $time[$i]);
@@ -42,6 +44,12 @@ function make_pair($time, $hashrate) {
 
 $hasharray = array_map('make_pair', $time, $hashrate);
 $datapoints = json_encode($hasharray);
+
+function make_buffer_pair($time, $buffer) {
+	return array($time, $buffer);
+}
+$buffer_array = array_map('make_buffer_pair', $time, $buffer);
+$buffer = json_encode($buffer_array);
 
 function make_pair2($time, $workers) {
     return array($time, $workers);

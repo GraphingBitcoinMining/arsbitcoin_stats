@@ -35,8 +35,6 @@ if ($cache == 1){
 include("memcached.php");
 }
 ?>
-
-
 <center><div style="width: 95%;"><div id="placeholder" style="width:800px;height:300px"></div>
 <div id="network" style="width:350px;height:100px;"></div>
 </div></center>
@@ -65,6 +63,7 @@ $(function () {
     var d1 = <?PHP echo $datapoints; ?>;
 	var d2 = <?PHP echo $datapoints2; ?>;
 	var d3 = <?PHP echo $datapoints3; ?>;
+	var buffer = <?PHP echo $buffer; ?>;
 	
 	var data = [ { label: "Network Hashrate (<?PHP echo $network_hashrate; ?> GH)", data: <?PHP echo $network_hashrate; ?>, color: "#ffcc00" },
 		{ label: "Pool Hashrate (<?PHP echo $hashrate; ?> GH)", data: <?PHP echo $hashrate; ?> , color: "<?php {echo $hr_color;} ?>"} ];
@@ -86,6 +85,7 @@ $(function () {
     $.plot($("#placeholder"),
            [ 
 	{ data: d1, lines: { show: true }, points: { show: false }, label: "Hashrate (GH)", color: "<?php {echo $hr_color;} ?>"}, 
+	{ data: buffer, lines: { show: true }, points: { show: false }, label: "SMPPS Buffer"},
 	{ data: d2, lines: { show: true }, points: { show: false }, label: "Workers", color: "<?php echo $worker_color; ?>" } , 
 	{ data: d3, bars: { show: true }, label: "Block Found", color: "#000000"} ], {
                
