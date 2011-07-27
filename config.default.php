@@ -1,5 +1,5 @@
 <?php
-$api_key="f891403409a40aef81e51155e8b427725c20cdbb019f62054e3e1b9cc68267b5";
+$api_key="";
 $cache = 1; //To enable caching with memcached, change this to 1
 $host = "localhost";
 $dbuser = "arsbtcstats";
