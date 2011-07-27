@@ -85,7 +85,7 @@ $(function () {
     $.plot($("#placeholder"),
            [ 
 			{ data: d1, lines: { show: true }, points: { show: false }, label: "Hashrate (GH)", color: "<?php {echo $hr_color;} ?>"}, 
-			{ data: buffer, lines: { show: true }, points: { show: false }, label: "SMPPS Buffer"},
+			{ data: buffer, lines: { show: true }, points: { show: false }, label: "SMPPS Buffer", color: "#009900"},
 			{ data: d2, lines: { show: true }, points: { show: false }, label: "Workers", color: "<?php echo $worker_color; ?>" } , 
 			{ data: d3, bars: { show: true }, label: "Block Found", color: "#000000"}
 		], {
