@@ -38,7 +38,8 @@ include("memcached.php");
 }
 ?>
 <center><div style="width: 95%;"><div id="container" style="width:1000px;height:600px"></div>
-<div id="network" style="width:1000px;height:300px;"></div>
+<?php //remove this comment too !!!   <div id="network" style="width:1000px;height:300px;"></div>
+?>
 </div>
 	<?php if ($enable_donation_message == 1) {
 	echo $donation_message;
