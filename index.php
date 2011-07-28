@@ -155,8 +155,8 @@ $(function () {
 				 },
 				 yaxes: [{ min: 0},
 				 {
-					alignTicksWithAxis: position == "right" ? 1 : null,
-                    position: position
+					alignTicksWithAxis: position == "right" ? 1,
+                    position: "right"
 				 }],
                grid: { hoverable: false },
 			   legend: { position: 'sw' }
