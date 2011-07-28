@@ -113,7 +113,7 @@ $(function () {
 						timeformat: "%H:%M<br>%m/%d"
 				 },
 				 yaxis: { min: 0},
-               grid: { hoverable: false},
+               grid: { hoverable: true},
 			   legend: { position: 'sw' }
              });
 
