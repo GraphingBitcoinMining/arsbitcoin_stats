@@ -101,7 +101,7 @@ $(function () {
              });
 			 
 	function btcFormatter(v, axis) {
-        return v.toFixed(axis.tickDecimals) +"BTC buffer";
+        return v.toFixed(axis.tickDecimals) +" BTC buffer";
     }
 function doPlot(position) {			 
 	$.plot($("#day"),
