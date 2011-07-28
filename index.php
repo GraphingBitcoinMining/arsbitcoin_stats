@@ -42,13 +42,13 @@ include("memcached.php");
 	<hr>
 	<center><div style="width: 95%;">
 	<h4>Daily</h4>
-	<div id="day" style="width:90%;height:400px"></div>
+	<div id="day" style="width:90%;height:200px"></div>
 	<h4>Weekly</h4>
-	<div id="week" style="width:90%;height:400px"></div>
+	<div id="week" style="width:90%;height:200px"></div>
 	<h4>Monthly</h4>
-	<div id="month" style="width:90%;height:400px"></div>
+	<div id="month" style="width:90%;height:200px"></div>
 	<h4>Anually</h4>
-	<div id="year" style="width:90%;height:400px"></div>
+	<div id="year" style="width:90%;height:200px"></div>
 	</div>
 	<?php if ($donation_message == 1) {
 	echo $message;
