@@ -91,7 +91,7 @@
 				$data = array();
 				//echo"running query for blocks<br><br>";
 				$min_time = time() - 345600;
-					$request = "SELECT * FROM blocks WHERE (`timestamp` >= ({$min_time}) && `timestamp` < (1311799681)) ORDER BY `timestamp`";
+					$request = "SELECT * FROM blocks WHERE (`timestamp` >= ({$min_time}) && `timestamp` < (1311799381)) ORDER BY `timestamp`";
 					//var_dump($request);
 					$result = mysql_query($request,$db);
 					while($row = mysql_fetch_array($result))
