@@ -99,6 +99,10 @@ $(function () {
                grid: { hoverable: true},
 			   legend: { position: 'nw' }
              });
+			 
+	function btcFormatter(v, axis) {
+        return v.toFixed(axis.tickDecimals) +"BTC buffer";
+    }
 function doPlot(position) {			 
 	$.plot($("#day"),
            [ { data: d1, label: "Hashrate (GH)", color: "<?php echo $hr_color; ?>"}, 
