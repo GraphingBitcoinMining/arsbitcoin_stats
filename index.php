@@ -156,7 +156,7 @@ function doPlot(position) {
 
                         } ],
 
-               grid: { hoverable: false },
+               grid: { hoverable: true },
 			   legend: { position: 'sw' },
              });
 
@@ -184,7 +184,7 @@ function doPlot(position) {
 
                         } ],
 
-               grid: { hoverable: false },
+               grid: { hoverable: true },
 			   legend: { position: 'sw' }
              });
 			 
@@ -212,7 +212,7 @@ function doPlot(position) {
 
                         } ],
 
-               grid: { hoverable: false },
+               grid: { hoverable: true },
 			   legend: { position: 'sw' }
              });
 }
@@ -308,7 +308,117 @@ doPlot("right");
             
         
     });
- 
+ 	$("#week").bind("plothover", function (event, pos, item) {
+        $("#x").text(pos.x.toFixed(2));
+        $("#y").text(pos.y.toFixed(2));
+		
+       
+		if (item) {
+			if (previousPoint != item.dataIndex) {
+				previousPoint = item.dataIndex;
+				
+				$("#tooltip").remove();
+				var x = item.datapoint[0],
+					y = item.datapoint[1];
+					var time = new Date(x);
+					var month = time.getMonth() + 1;
+					var day = time.getDate();
+					var hours = time.getUTCHours();
+					var minutes = time.getMinutes() ;
+					if (minutes < 10){
+					minutes = "0" + minutes
+					}
+					var datetime = hours  + ':' + minutes + '  ' + month + '/' + day;
+					if (item.series.label != "Block Found") {
+						var content = "<center>" + item.series.label +" at <br>" + datetime + " =<br>" + y + "</center>";}
+					else {
+						var content = "<center>" + item.series.label +" at <br>" + datetime + "</center>"; }
+
+				showTooltip(item.pageX, item.pageY,
+							content);
+			}
+		}
+		else {
+                $("#tooltip").remove();
+                previousPoint = null;            
+            }
+            
+        
+    });
+		$("#month").bind("plothover", function (event, pos, item) {
+        $("#x").text(pos.x.toFixed(2));
+        $("#y").text(pos.y.toFixed(2));
+		
+       
+		if (item) {
+			if (previousPoint != item.dataIndex) {
+				previousPoint = item.dataIndex;
+				
+				$("#tooltip").remove();
+				var x = item.datapoint[0],
+					y = item.datapoint[1];
+					var time = new Date(x);
+					var month = time.getMonth() + 1;
+					var day = time.getDate();
+					var hours = time.getUTCHours();
+					var minutes = time.getMinutes() ;
+					if (minutes < 10){
+					minutes = "0" + minutes
+					}
+					var datetime = hours  + ':' + minutes + '  ' + month + '/' + day;
+					if (item.series.label != "Block Found") {
+						var content = "<center>" + item.series.label +" at <br>" + datetime + " =<br>" + y + "</center>";}
+					else {
+						var content = "<center>" + item.series.label +" at <br>" + datetime + "</center>"; }
+
+				showTooltip(item.pageX, item.pageY,
+							content);
+			}
+		}
+		else {
+                $("#tooltip").remove();
+                previousPoint = null;            
+            }
+            
+        
+    });
+		$("#year").bind("plothover", function (event, pos, item) {
+        $("#x").text(pos.x.toFixed(2));
+        $("#y").text(pos.y.toFixed(2));
+		
+       
+		if (item) {
+			if (previousPoint != item.dataIndex) {
+				previousPoint = item.dataIndex;
+				
+				$("#tooltip").remove();
+				var x = item.datapoint[0],
+					y = item.datapoint[1];
+					var time = new Date(x);
+					var month = time.getMonth() + 1;
+					var day = time.getDate();
+					var hours = time.getUTCHours();
+					var minutes = time.getMinutes() ;
+					if (minutes < 10){
+					minutes = "0" + minutes
+					}
+					var datetime = hours  + ':' + minutes + '  ' + month + '/' + day;
+					if (item.series.label != "Block Found") {
+						var content = "<center>" + item.series.label +" at <br>" + datetime + " =<br>" + y + "</center>";}
+					else {
+						var content = "<center>" + item.series.label +" at <br>" + datetime + "</center>"; }
+
+				showTooltip(item.pageX, item.pageY,
+							content);
+			}
+		}
+		else {
+                $("#tooltip").remove();
+                previousPoint = null;            
+            }
+            
+        
+    });
 });
 </script>
 
