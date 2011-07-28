@@ -120,9 +120,7 @@ function doPlot(position) {
 
                           alignTicksWithAxis: position == "right" ? 1 : null,
 
-                          position: position,
-
-                          tickFormatter: euroFormatter
+                          position: position
 
                         } ],
 
@@ -149,9 +147,7 @@ function doPlot(position) {
 
                           alignTicksWithAxis: position == "right" ? 1 : null,
 
-                          position: position,
-
-                          tickFormatter: euroFormatter
+                          position: position
 
                         } ],
 
@@ -179,9 +175,7 @@ function doPlot(position) {
 
                           alignTicksWithAxis: position == "right" ? 1 : null,
 
-                          position: position,
-
-                          tickFormatter: euroFormatter
+                          position: position
 
                         } ],
 
@@ -209,9 +203,7 @@ function doPlot(position) {
 
                           alignTicksWithAxis: position == "right" ? 1 : null,
 
-                          position: position,
-
-                          tickFormatter: euroFormatter
+                          position: position
 
                         } ],
 
