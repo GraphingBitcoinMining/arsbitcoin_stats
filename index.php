@@ -124,7 +124,8 @@ function doPlot(position) {
 
                           alignTicksWithAxis: position == "right" ? 1 : null,
 
-                          position: position
+                          position: position,
+						  tickFormatter: btcFormatter
 
                         } ],
 
@@ -151,7 +152,8 @@ function doPlot(position) {
 
                           alignTicksWithAxis: position == "right" ? 1 : null,
 
-                          position: position
+                          position: position,
+						  tickFormatter: btcFormatter
 
                         } ],
 
@@ -179,7 +181,8 @@ function doPlot(position) {
 
                           alignTicksWithAxis: position == "right" ? 1 : null,
 
-                          position: position
+                          position: position,
+						  tickFormatter: btcFormatter
 
                         } ],
 
@@ -207,7 +210,8 @@ function doPlot(position) {
 
                           alignTicksWithAxis: position == "right" ? 1 : null,
 
-                          position: position
+                          position: position,
+						  tickFormatter: btcFormatter
 
                         } ],
 
