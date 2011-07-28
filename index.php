@@ -50,7 +50,7 @@ include("memcached.php");
 	<h4>Anually</h4>
 	<div id="year" style="width:90%;height:200px"></div>
 	</div>
-	<?php if ($donation_message == 1) {
+	<?php if ($include_donation_message == 1) {
 	echo $message;
 } ?></center>
 
