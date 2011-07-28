@@ -99,7 +99,7 @@ $(function () {
                grid: { hoverable: true},
 			   legend: { position: 'nw' }
              });
-			 
+function doPlot(position) {			 
 	$.plot($("#day"),
            [ { data: d1, label: "Hashrate (GH)", color: "<?php echo $hr_color; ?>"}, 
 			{ data: buffer, lines: { show: true }, points: { show: false }, label: "SMPPS Buffer", color: "#009900", yaxis: 2} ], {
@@ -112,7 +112,20 @@ $(function () {
 						mode: "time",
 						timeformat: "%H:%M<br>%m/%d"
 				 },
-				 yaxis: { min: 0}
+				 yaxes: [ { min: 0 },
+
+                        {
+
+                          // align if we are to the right
+
+                          alignTicksWithAxis: position == "right" ? 1 : null,
+
+                          position: position,
+
+                          tickFormatter: euroFormatter
+
+                        } ],
+
 			   legend: { position: 'sw' }
              });
 
@@ -128,7 +141,20 @@ $(function () {
 						mode: "time",
 						timeformat: "%m/%d"
 				 },
-				 yaxis: { min: 0}
+				 yaxes: [ { min: 0 },
+
+                        {
+
+                          // align if we are to the right
+
+                          alignTicksWithAxis: position == "right" ? 1 : null,
+
+                          position: position,
+
+                          tickFormatter: euroFormatter
+
+                        } ],
+
                grid: { hoverable: false },
 			   legend: { position: 'sw' },
              });
@@ -145,7 +171,20 @@ $(function () {
 						mode: "time",
 						timeformat: "%m/%d"
 				 },
-				 yaxis: { min: 0}
+				 yaxes: [ { min: 0 },
+
+                        {
+
+                          // align if we are to the right
+
+                          alignTicksWithAxis: position == "right" ? 1 : null,
+
+                          position: position,
+
+                          tickFormatter: euroFormatter
+
+                        } ],
+
                grid: { hoverable: false },
 			   legend: { position: 'sw' }
              });
@@ -162,10 +201,26 @@ $(function () {
 						mode: "time",
 						timeformat: "%m/%d"
 				 },
-				 yaxis: { min: 0}
+				 yaxes: [ { min: 0 },
+
+                        {
+
+                          // align if we are to the right
+
+                          alignTicksWithAxis: position == "right" ? 1 : null,
+
+                          position: position,
+
+                          tickFormatter: euroFormatter
+
+                        } ],
+
                grid: { hoverable: false },
 			   legend: { position: 'sw' }
              });
+}
+
+doPlot("right");
 
     function showTooltip(x, y, contents) {
         $('<div id="tooltip">' + contents + '</div>').css( {
