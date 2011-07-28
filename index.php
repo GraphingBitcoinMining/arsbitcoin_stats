@@ -228,7 +228,7 @@ doPlot("right");
             border: '1px solid #fdd',
             padding: '2px',
             'background-color': color,
-            opacity: 0.5
+            opacity: 0.6
         }).appendTo("body").fadeIn(200);
     }
 	
