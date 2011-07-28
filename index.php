@@ -219,7 +219,7 @@ function doPlot(position) {
 
 doPlot("right");
 
-    function showTooltip(x, y, contents) {
+    function showTooltip(x, y, contents, color) {
         $('<div id="tooltip">' + contents + '</div>').css( {
             position: 'absolute',
             display: 'none',
@@ -227,7 +227,7 @@ doPlot("right");
             left: x + 5,
             border: '1px solid #fdd',
             padding: '2px',
-            'background-color': '#fee',
+            'background-color': color,
             opacity: 0.75
         }).appendTo("body").fadeIn(200);
     }
@@ -259,9 +259,22 @@ doPlot("right");
 						var content = "<center>" + item.series.label +" at <br>" + datetime + " =<br>" + y + "</center>";}
 					else {
 						var content = "<center>" + item.series.label +" at <br>" + datetime + "</center>"; }
-
+					
+					//set mouseover color
+					if (item.series.label == "Hashrate (GH)") {
+					var color = "<?php {echo $hr_color;} ?>"
+					}
+					
+					else if (item.series.label == "SMPPS Buffer") {
+					var color = "#009900"
+					}
+					
+					else if (item.series.label == "Workers") {
+					var color = "<?php echo $worker_color; ?>" 
+					}
+					
 				showTooltip(item.pageX, item.pageY,
-							content);
+							content, color);
 			}
 		}
 		else {
@@ -296,9 +309,16 @@ doPlot("right");
 						var content = "<center>" + item.series.label +" at <br>" + datetime + " =<br>" + y + "</center>";}
 					else {
 						var content = "<center>" + item.series.label +" at <br>" + datetime + "</center>"; }
-
+					
+					if (item.series.label == "Hashrate (GH)") {
+					var color = "<?php {echo $hr_color;} ?>"
+					}
+					
+					else if (item.series.label == "SMPPS Buffer") {
+					var color = "#009900"
+					}
 				showTooltip(item.pageX, item.pageY,
-							content);
+							content, color);
 			}
 		}
 		else {
@@ -333,9 +353,17 @@ doPlot("right");
 						var content = "<center>" + item.series.label +" at <br>" + datetime + " =<br>" + y + "</center>";}
 					else {
 						var content = "<center>" + item.series.label +" at <br>" + datetime + "</center>"; }
-
+					
+					if (item.series.label == "Hashrate (GH)") {
+					var color = "<?php {echo $hr_color;} ?>"
+					}
+					
+					else if (item.series.label == "SMPPS Buffer") {
+					var color = "#009900"
+					}
+					
 				showTooltip(item.pageX, item.pageY,
-							content);
+							content, color);
 			}
 		}
 		else {
@@ -370,9 +398,16 @@ doPlot("right");
 						var content = "<center>" + item.series.label +" at <br>" + datetime + " =<br>" + y + "</center>";}
 					else {
 						var content = "<center>" + item.series.label +" at <br>" + datetime + "</center>"; }
-
+					
+					if (item.series.label == "Hashrate (GH)") {
+					var color = "<?php {echo $hr_color;} ?>"
+					}
+					
+					else if (item.series.label == "SMPPS Buffer") {
+					var color = "#009900"
+					}
 				showTooltip(item.pageX, item.pageY,
-							content);
+							content, color);
 			}
 		}
 		else {
@@ -407,9 +442,16 @@ doPlot("right");
 						var content = "<center>" + item.series.label +" at <br>" + datetime + " =<br>" + y + "</center>";}
 					else {
 						var content = "<center>" + item.series.label +" at <br>" + datetime + "</center>"; }
-
+					
+					if (item.series.label == "Hashrate (GH)") {
+					var color = "<?php {echo $hr_color;} ?>"
+					}
+					
+					else if (item.series.label == "SMPPS Buffer") {
+					var color = "#009900"
+					}
 				showTooltip(item.pageX, item.pageY,
-							content);
+							content, color);
 			}
 		}
 		else {
