@@ -38,20 +38,16 @@ include("memcached.php");
 }
 ?>
 <center><div style="width: 95%;"><div id="container" style="width:1000px;height:600px"></div>
-<div id="network" style="width:350px;height:350px;"></div>
+<div id="network" style="width:1000px;height:300px;"></div>
 </div>
 	<?php if ($enable_donation_message == 1) {
-	echo $message;
+	echo $donation_message;
 } ?></center>
-<?php echo "Hashrate: ". $local_hashrate."<br>Network Hashrate: ".$network_hashrate; ?>
-<?php 
-	$total = $local_hashrate + $network_hashrate;
-	$local_percent = ($local_hashrate / $total) *100;
-	$network_percent = ($network_hashrate / $total) *100;
-	echo "<br><br>Local Percent: ".$local_percent."<br>Network Percent: ".$network_percent;
-?>
+
 <script type="text/javascript">
-var chart1; // globally available
+var chart1,
+		chart2; // globally available
+
 $(document).ready(function() {
 
       chart1 = new Highcharts.StockChart({
@@ -99,7 +95,6 @@ $(document).ready(function() {
 			}
 		},
          yAxis: {
-		 gridLineWidth: 2 ? 0 : 1,
 		 min: 0,
             title: {
                text: 'value'
@@ -111,53 +106,51 @@ $(document).ready(function() {
          }, {
             name: 'Workers',
             data: <?php echo $workers; ?>
-         }]
+         }, {
+			name: 'Buffer',
+			data: <?php echo $buffer; ?>
+		}]
 
       });
 
-	  chart2 = new Highcharts.Chart({
+	  chart2 = new Highcharts.StockChart({
          chart: {
-         renderTo: 'network',
-         plotBackgroundColor: null,
-         plotBorderWidth: null,
-         plotShadow: false
-		  },
-		  title: {
-			 text: 'Ars pool compared to network hashrate'
-		  },
-		  tooltip: {
-			 formatter: function() {
-				return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
-			 }
-		  },
-		  plotOptions: {
-			 pie: {
-				allowPointSelect: true,
-				cursor: 'pointer',
-				dataLabels: {
-				   enabled: true,
-				   color: Highcharts.theme.textColor || '#000000',
-				   connectorColor: Highcharts.theme.textColor || '#000000',
-				   formatter: function() {
-					  return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
-				   }
-				}
-			 }
-		  },
-		   series: [{
-			 type: 'pie',
-			 name: 'Browser share',
-			 data: [
-				['Network Hashrate',	<?php echo $network_percent; ?>],
-				{
-				   name: 'Ars Hashrate',    
-				   y:	<?php echo $local_percent; ?>,
-				   sliced: true,
-				   selected: true
-				}
-			 ]
-		  }]
-	   });
+			renderTo: 'network'
+		 },
+		 rangeSelector: {
+			enabled: 0
+		},
+		navigator: {
+			enabled: 0
+		},
+		scrollbar: {
+	enabled: 0
+},
+		title: {
+			text: 'Ars Hashrate and Network Hashrate'
+		},
+		xAxis: {
+			type: 'datetime',
+			title: {
+				text: null
+			}
+		},
+         yAxis: {
+		 min: 0,
+            title: {
+               text: 'value'
+            }
+         },
+		 series: [ {
+            name: 'Network Hashrate',
+            data: <?php echo $network_rate; ?>,
+			type: 'area'
+         },{
+            name: 'Ars Hashrate',
+            data: <?php echo $hashrate; ?>,
+			type: 'area'
+         }]
+		 });
 	  
    });
    </script>
