@@ -102,7 +102,7 @@ $(function () {
 			 
 	$.plot($("#day"),
            [ { data: d1, label: "Hashrate (GH)", color: "<?php echo $hr_color; ?>"}, 
-			{ data: buffer, lines: { show: true }, points: { show: false }, label: "SMPPS Buffer", color: "#009900"} ], {
+			{ data: buffer, lines: { show: true }, points: { show: false }, label: "SMPPS Buffer", color: "#009900", yaxis: 2} ], {
                series: {
                    lines: { show: true },
                    points: { show: false }
@@ -119,7 +119,7 @@ $(function () {
 
     $.plot($("#week"),
            [ { data: d1, label: "Hashrate (GH)", color: "<?php echo $hr_color; ?>"}, 
-			{ data: buffer, lines: { show: true }, points: { show: false }, label: "SMPPS Buffer", color: "#009900"} ], {
+			{ data: buffer, lines: { show: true }, points: { show: false }, label: "SMPPS Buffer", color: "#009900", yaxis: 2} ], {
                series: {
                    lines: { show: true },
                    points: { show: false }
@@ -136,7 +136,7 @@ $(function () {
 
     $.plot($("#month"),
            [ { data: d1, label: "Hashrate (GH)", color: "<?php echo $hr_color; ?>"}, 
-			{ data: buffer, lines: { show: true }, points: { show: false }, label: "SMPPS Buffer", color: "#009900"} ], {
+			{ data: buffer, lines: { show: true }, points: { show: false }, label: "SMPPS Buffer", color: "#009900", yaxis: 2} ], {
                series: {
                    lines: { show: true },
                    points: { show: false }
@@ -153,7 +153,7 @@ $(function () {
 			 
     $.plot($("#year"),
            [ { data: d1, label: "Hashrate (GH)", color: "<?php echo $hr_color; ?>"}, 
-			{ data: buffer, lines: { show: true }, points: { show: false }, label: "SMPPS Buffer", color: "#009900"} ], {
+			{ data: buffer, lines: { show: true }, points: { show: false }, label: "SMPPS Buffer", color: "#009900", yaxis: 2} ], {
                series: {
                    lines: { show: true },
                    points: { show: false }
