@@ -58,7 +58,13 @@ $(document).ready(function() {
          },
 		 
          title: {
-            text: 'ArsBitCoin Mining Pool'
+            text: 'ArsBitcoin Mining Pool'
+         },
+         legend: {
+            align: 'center',
+            enabled: true,
+            verticalAlign: 'top',
+            y: 40
          },
          rangeSelector: {
 			enabled: 1,
