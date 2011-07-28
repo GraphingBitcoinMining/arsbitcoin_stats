@@ -112,11 +112,7 @@ $(function () {
 						mode: "time",
 						timeformat: "%H:%M<br>%m/%d"
 				 },
-				 yaxes: [{ min: 0},
-				 {
-					alignTicksWithAxis: position == "right" ? 1 : null,
-                    position: position
-				 }],
+				 yaxis: { min: 0}
 			   legend: { position: 'sw' }
              });
 
@@ -132,11 +128,7 @@ $(function () {
 						mode: "time",
 						timeformat: "%m/%d"
 				 },
-				 yaxes: [{ min: 0},
-				 {
-					alignTicksWithAxis: position == "right" ? 1 : null,
-                    position: position
-				 }],
+				 yaxis: { min: 0}
                grid: { hoverable: false },
 			   legend: { position: 'sw' },
              });
@@ -153,11 +145,7 @@ $(function () {
 						mode: "time",
 						timeformat: "%m/%d"
 				 },
-				 yaxes: [{ min: 0},
-				 {
-					alignTicksWithAxis: position == "right" ? 1,
-                    position: "right"
-				 }],
+				 yaxis: { min: 0}
                grid: { hoverable: false },
 			   legend: { position: 'sw' }
              });
@@ -174,11 +162,7 @@ $(function () {
 						mode: "time",
 						timeformat: "%m/%d"
 				 },
-				 yaxes: [{ min: 0},
-				 {
-					alignTicksWithAxis: position == "right" ? 1 : null,
-                    position: position
-				 }],
+				 yaxis: { min: 0}
                grid: { hoverable: false },
 			   legend: { position: 'sw' }
              });
