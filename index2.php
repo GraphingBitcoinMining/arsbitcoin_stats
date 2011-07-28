@@ -1,10 +1,12 @@
 ﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<!--[if IE]><script language="javascript" type="text/javascript" src="./js/flot/excanvas.min.js"></script><![endif]-->
-<script type="text/javascript" src="./js/flot/jquery.js"></script>
-<script type="text/javascript" src="./js/flot/jquery.flot.js"></script>
-<script language="javascript" type="text/javascript" src="./js/flot/jquery.flot.pie.js"></script>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
+<script src="./js/highstock/js/highstock.js" type="text/javascript"></script>
+
+
 <title>Stats</title>
 <style type="text/css">
     html, body {
@@ -35,7 +37,7 @@ if ($cache == 1){
 include("memcached.php");
 }
 ?>
-<center><div style="width: 95%;"><div id="placeholder" style="width:1000px;height:600px"></div>
+<center><div style="width: 95%;"><div id="container" style="width:1000px;height:600px"></div>
 <div id="network" style="width:350px;height:100px;"></div>
 </div></center>
 
@@ -50,13 +52,46 @@ include("memcached.php");
 	<h4>Anually</h4>
 	<div id="year" style="width:90%;height:200px"></div>
 	</div>
-	<?php if ($include_donation_message == 1) {
+	<?php if ($donation_message == 1) {
 	echo $message;
 } ?></center>
 
 
 	<?php //echo $datapoints2; ?>
 <?php //echo $datapoints3; ?>
+<script type="text/javascript">
+var chart1; // globally available
+$(document).ready(function() {
+
+      chart1 = new Highcharts.Chart({
+         chart: {
+            renderTo: 'container',
+            type: 'line'
+         },
+         title: {
+            text: 'Fruit Consumption'
+         },
+         xAxis: {
+            categories: ['Apples', 'Bananas', 'Oranges']
+         },
+         yAxis: {
+            title: {
+               text: 'Fruit eaten'
+            }
+         },
+         series: [{
+            name: 'Jane',
+            data: [1, 0, 4]
+         }, {
+            name: 'John',
+            data: [5, 7, 3]
+         }]
+
+      });
+
+   });
+   </script>
+<?php /*
 	<script type="text/javascript">
 	
 $(function () {
@@ -464,6 +499,6 @@ doPlot("right");
 });
 </script>
 
-
+*/ ?>
 </body>
 </html>

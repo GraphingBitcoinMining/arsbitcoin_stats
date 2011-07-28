@@ -11,7 +11,9 @@
 	function make_pair($time, $hashrate) {
 		return array($time, $hashrate);
 	}
-
+	function make_network_pair($time, $network_hashrate) {
+		return array($time, $network_hashrate);
+	}
 
 	function make_pair2($time, $workers) {
 		return array($time, $workers);
@@ -38,7 +40,7 @@
 			//echo "Checking cache for hashrate<br><br>";
 				$data = $memcache->get('hashrate');
 				
-				if (!$data) {
+				if ($data || !$data) {
 					//echo "<br><br>Not Memcached<br><br>";
 					$data = array();
 					//echo "running query for hashrate<br><br>";
@@ -62,9 +64,11 @@
 							$buffer = array_reverse($buffer_raw);
 							$y_max = max($buffer) +50;
 							//get hashrate
-							$network_rate = end($network_rate);
-							$hasharray = array_map('make_pair', $time, $hashrate);
-							$datapoints = json_encode($hasharray);
+							$hasharray = array_map('make_pair', $time, $network_rate);
+							$network_rate = json_encode($hasharray);
+							
+							$hasharray = array_map('make_network_pair', $time, $hashrate);
+							$hashrate = json_encode($hasharray);
 							//var_dump($datapoints);
 							//get workers
 							$hasharray = array_map('make_pair2', $time, $workers);
@@ -73,8 +77,8 @@
 							
 							$buffer_array = array_map('make_buffer_pair', $time, $buffer);
 							$buffer = json_encode($buffer_array);
-							//var_dump($datapoints2);
-							$data = array('1'=>$datapoints,'2'=>$datapoints2,'3'=>$network_rate,'4'=>$hashrate2,'5'=>$y_max,'6'=>$buffer);
+							
+							$data = array('1'=>$hashrate,'2'=>$datapoints2,'3'=>$network_rate,'4'=>$hashrate2,'5'=>$y_max,'6'=>$buffer);
 					//var_dump($data);
 					$memcache->set('hashrate', $data, 0, $expire ) or die ("Failed to save data at the server");
 				}
@@ -91,7 +95,7 @@
 				$data = array();
 				//echo"running query for blocks<br><br>";
 				$min_time = time() - 345600;
-					$request = "SELECT * FROM blocks WHERE (`timestamp` >= ({$min_time}) && `timestamp` < (1311799381)) ORDER BY `timestamp`";
+					$request = "SELECT * FROM blocks WHERE (`timestamp` >= ({$min_time})) ORDER BY `timestamp`";
 					//var_dump($request);
 					$result = mysql_query($request,$db);
 					while($row = mysql_fetch_array($result))
@@ -114,22 +118,19 @@
     
     
 $result = get_datapoints('hashrate');
-//echo "<br><b>datapoints = </b>";
 
-$datapoints = $result['1'];
-//echo $datapoints;
-//echo "<br><br><b>datapoints2 =</b> ";
-$datapoints2 = $result['2'];
+$hashrate = $result['1'];
+//echo "<h1>Hashrate</h1>";
+//var_dump($hashrate);
+$workers = $result['2'];
 $network_rate = $result['3'];
+//echo "<h1>Network Hashrate</h1>";
+//var_dump($network_rate);
 $last_hashrate = $result['4'];
 $y_max = $result['5'];
 echo $buffer;
 $buffer = $result['6'];
-//echo $datapoints2;
-//echo "<br><br>Hashrate Result: <br>";
-       // var_dump($result);
-$network_hashrate = $network_rate - $last_hashrate;
-$hashrate = $last_hashrate;
+$local_hashrate = $last_hashrate;
 	
     $result = get_datapoints('blocks');
 	
