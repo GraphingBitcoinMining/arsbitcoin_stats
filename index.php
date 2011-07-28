@@ -112,7 +112,7 @@ $(document).ready(function() {
 		}]
 
       });
-
+<?php /*  remove these comments and the php to add a second graph in with ars hashrate : network hashrate
 	  chart2 = new Highcharts.StockChart({
          chart: {
 			renderTo: 'network'
@@ -151,7 +151,7 @@ $(document).ready(function() {
 			type: 'area'
          }]
 		 });
-	  
+	  */ ?>
    });
    </script>
    
