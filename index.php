@@ -35,7 +35,7 @@ if ($cache == 1){
 include("memcached.php");
 }
 ?>
-<center><div style="width: 95%;"><div id="placeholder" style="width:800px;height:300px"></div>
+<center><div style="width: 95%;"><div id="placeholder" style="width:1000px;height:600px"></div>
 <div id="network" style="width:350px;height:100px;"></div>
 </div></center>
 
@@ -228,7 +228,7 @@ doPlot("right");
             border: '1px solid #fdd',
             padding: '2px',
             'background-color': '#fee',
-            opacity: 0.80
+            opacity: 0.75
         }).appendTo("body").fadeIn(200);
     }
 	
