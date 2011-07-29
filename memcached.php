@@ -62,7 +62,6 @@
 							$buffer_raw[] = (float)$row["buffer"];
 						  }
 							$time = array_reverse($time_raw);
-							$buffer_time = $time;
 							
 							$hashrate = array_reverse($hashrate_raw);
 							$hashrate2 = end($hashrate);
@@ -84,7 +83,7 @@
 							$datapoints2 = json_encode($hasharray);
 							
 							
-							$buffer_array = array_map('make_buffer_pair', $buffer_time, $buffer);
+							$buffer_array = array_map('make_pair', $time, $buffer);
 							$buffer = json_encode($buffer_array);
 							
 							$data = array('1'=>$hashrate,'2'=>$datapoints2,'3'=>$network_rate,'4'=>$hashrate2,'5'=>$y_max,'6'=>$buffer);
