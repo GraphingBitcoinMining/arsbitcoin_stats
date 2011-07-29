@@ -44,9 +44,9 @@
 					//echo "<br><br>Not Memcached<br><br>";
 					$data = array();
 					//echo "running query for hashrate<br><br>";
-					$request = "SELECT * FROM `global_stats` WHERE `time` >= (1311799681) ORDER BY `id` DESC";
+					/*$request = "SELECT * FROM `global_stats` WHERE `time` >= (1311799681) ORDER BY `id` DESC";
 						$result = mysql_query($request,$db);
-					   /*while($row = mysql_fetch_array($result))
+					   while($row = mysql_fetch_array($result))
 						  {
 								$buffer_time_raw[] = (float)$row["time"]*1000;
 								$buffer_raw[] = (float)$row["buffer"];
