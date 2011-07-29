@@ -23,8 +23,8 @@
 		return array($blocks, 5000);
 	}
 	
-	function make_buffer_pair($time, $buffer) {
-	return array($time, $buffer);
+	function make_buffer_pair($buffer_time, $buffer) {
+	return array($buffer_time, $buffer);
 }
 	function get_datapoints($query) {
 
@@ -52,8 +52,16 @@
 							$hashrate_raw[] = round((float)$row["hashrate"]/1000, 2);
 							$workers_raw[] = round((float)$row["workers"]);
 							$network_hashrate_raw[] = round((float)$row["network_hashrate"], 2);
-							$buffer_raw[] = (float)$row["buffer"];
+							//$buffer_raw[] = (float)$row["buffer"];
 						  }
+						  $request = "SELECT * FROM `global_stats` WHERE `time` >= (1311799681) ORDER BY `id` DESC";
+						$result = mysql_query($request,$db);
+					   while($row = mysql_fetch_array($result))
+						  {
+								$buffer_time_raw[] = (float)$row["time"]*1000;
+								$buffer_raw[] = (float)$row["buffer"];
+						  }
+							$buffer_time = array_reverse($buffer_time_raw);
 							$time = array_reverse($time_raw);
 							$hashrate = array_reverse($hashrate_raw);
 							$hashrate2 = end($hashrate);
@@ -75,7 +83,7 @@
 							$datapoints2 = json_encode($hasharray);
 							
 							
-							$buffer_array = array_map('make_buffer_pair', $time, $buffer);
+							$buffer_array = array_map('make_buffer_pair', $buffer_time, $buffer);
 							$buffer = json_encode($buffer_array);
 							
 							$data = array('1'=>$hashrate,'2'=>$datapoints2,'3'=>$network_rate,'4'=>$hashrate2,'5'=>$y_max,'6'=>$buffer);
