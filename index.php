@@ -61,7 +61,8 @@ $(document).ready(function() {
 				var s = '<b>'+ Highcharts.dateFormat('%H:%M, %A, %b %e, %Y', this.x) +'</b>';
 
                 $.each(this.points, function(i, point) {
-                    s += '<br /><span style="font-weight: bold;">'+this.series.name + ':' + '</span>'+ Math.round(point.y*1000)/1000;
+				color = point.series.color;
+                    s += '<br /><span style="font-weight: bold; color: '+color+'">'+this.series.name + ':' + '</span>'+ Math.round(point.y*1000)/1000;
                 });
             
                 return s;
