@@ -46,11 +46,11 @@
 					//echo "running query for hashrate<br><br>";
 					$request = "SELECT * FROM `global_stats` WHERE `time` >= (1311799681) ORDER BY `id` DESC";
 						$result = mysql_query($request,$db);
-					   while($row = mysql_fetch_array($result))
+					   /*while($row = mysql_fetch_array($result))
 						  {
 								$buffer_time_raw[] = (float)$row["time"]*1000;
 								$buffer_raw[] = (float)$row["buffer"];
-						  }
+						  }*/
 					$request = "SELECT * FROM `global_stats` ORDER BY `id` DESC";
 					$result = mysql_query($request,$db);
 					   while($row = mysql_fetch_array($result))
@@ -59,10 +59,10 @@
 							$hashrate_raw[] = round((float)$row["hashrate"]/1000, 2);
 							$workers_raw[] = round((float)$row["workers"]);
 							$network_hashrate_raw[] = round((float)$row["network_hashrate"], 2);
-							//$buffer_raw[] = (float)$row["buffer"];
+							$buffer_raw[] = (float)$row["buffer"];
 						  }
 						  
-							$buffer_time = array_reverse($buffer_time_raw);
+							$buffer_time = array_reverse($time_raw);
 							$time = array_reverse($time_raw);
 							$hashrate = array_reverse($hashrate_raw);
 							$hashrate2 = end($hashrate);
