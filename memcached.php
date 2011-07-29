@@ -40,7 +40,7 @@
 			//echo "Checking cache for hashrate<br><br>";
 				$data = $memcache->get('hashrate');
 				
-				if ($data || !$data) {
+				if (!$data) {
 					//echo "<br><br>Not Memcached<br><br>";
 					$data = array();
 					//echo "running query for hashrate<br><br>";
@@ -49,9 +49,9 @@
 					   while($row = mysql_fetch_array($result))
 						  {
 							$time_raw[] = (float)$row["time"]*1000;
-							$hashrate_raw[] = (float)$row["hashrate"]/1000;
-							$workers_raw[] = (float)$row["workers"];
-							$network_hashrate_raw[] = (float)$row["network_hashrate"];
+							$hashrate_raw[] = round((float)$row["hashrate"]/1000, 2);
+							$workers_raw[] = round((float)$row["workers"]);
+							$network_hashrate_raw[] = round((float)$row["network_hashrate"], 2);
 							$buffer_raw[] = (float)$row["buffer"];
 						  }
 							$time = array_reverse($time_raw);
