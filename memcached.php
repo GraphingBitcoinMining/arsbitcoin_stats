@@ -61,9 +61,9 @@
 							$network_hashrate_raw[] = round((float)$row["network_hashrate"], 2);
 							$buffer_raw[] = (float)$row["buffer"];
 						  }
-						  
-							$buffer_time = array_reverse($time_raw);
 							$time = array_reverse($time_raw);
+							$buffer_time = $time;
+							
 							$hashrate = array_reverse($hashrate_raw);
 							$hashrate2 = end($hashrate);
 							$workers = array_reverse($workers_raw);
