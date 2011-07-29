@@ -5,7 +5,7 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
 <script src="./js/js/highstock.js" type="text/javascript"></script>
-
+<script type="text/javascript" src="./js/js/modules/exporting.js"></script>
 
 <title>Stats</title>
 <style type="text/css">
