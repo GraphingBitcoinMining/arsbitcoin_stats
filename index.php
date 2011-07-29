@@ -24,16 +24,14 @@
 </head>
 <body>
 <?php
-//error_reporting(E_ALL ^ E_NOTICE);
-//echo "including config.php<br><br>";
 include("config.php");
 
 if ($cache == 0){
-//echo "including global stats<br><br>";
+
 include("global_stats.php");
 }
 if ($cache == 1){
-//echo "including memcached.php<br><br>";
+
 include("memcached.php");
 }
 ?>
@@ -64,6 +62,9 @@ $(document).ready(function() {
 				color = point.series.color;
 				if (this.series.name == 'Workers') {
 					s += '<br /><span style="font-weight: bold; color: '+color+'">'+this.series.name + ':' + '</span>'+ Math.round(point.y);
+				}
+				else if (this.series.name == "Buffer") {
+                    s += '<br /><span style="font-weight: bold; color: '+color+'">'+this.series.name + ':' + '</span>'+ Math.round(point.y*1000)/1000 + ' BTC';
 				}
 				else {
                     s += '<br /><span style="font-weight: bold; color: '+color+'">'+this.series.name + ':' + '</span>'+ Math.round(point.y*1000)/1000;
@@ -143,50 +144,5 @@ $(document).ready(function() {
 	  });
 	  </script>
 	  
-<?php /*  remove these comments and the php to add a second graph in with ars hashrate : network hashrate  ?>
-<script src="./js/js_highcharts/highcharts.js" type="text/javascript"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-	  chart2 = new Highcharts.Chart({
-         chart: {
-			renderTo: 'network',
-			type: 'pie'
-		 },
-		 rangeSelector: {
-			enabled: 0
-		},
-		navigator: {
-			enabled: 0
-		},
-		scrollbar: {
-	enabled: 0
-},
-		title: {
-			text: 'Ars Hashrate and Network Hashrate'
-		},
-		xAxis: {
-			type: 'datetime',
-			title: {
-				text: null
-			}
-		},
-         yAxis: {
-		 min: 0,
-            title: {
-               text: 'value'
-            }
-         },
-		 series: [ {
-            name: 'Network Hashrate',
-            data: <?php echo $network_rate; ?>
-         },{
-            name: 'Ars Hashrate',
-            data: <?php echo $hashrate; ?>
-         }]
-		 });
-	 
-   });
-   </script>
-   <?php /* */ ?>
 </body>
 </html>
