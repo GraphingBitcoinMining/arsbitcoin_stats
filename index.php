@@ -38,8 +38,8 @@ include("memcached.php");
 }
 ?>
 <center><div style="width: 95%;"><div id="container" style="width:1000px;height:600px"></div>
-<?php //remove this comment too !!!   <div id="network" style="width:1000px;height:300px;"></div>
-?>
+<div id="network" style="width:1000px;height:300px;"></div>
+
 </div>
 	<?php if ($enable_donation_message == 1) {
 	echo $donation_message;
@@ -86,6 +86,10 @@ $(document).ready(function() {
 				count: 1,
 				text: '1d'
 			}, {
+				type: 'day',
+				count: 3,
+				text: '3d'
+			},{
 				type: 'week',
 				count: 1,
 				text: '1w'
@@ -131,10 +135,17 @@ $(document).ready(function() {
 		}]
 
       });
-<?php /*  remove these comments and the php to add a second graph in with ars hashrate : network hashrate
-	  chart2 = new Highcharts.StockChart({
+	  });
+	  </script>
+	  
+<?php /*  remove these comments and the php to add a second graph in with ars hashrate : network hashrate  ?>
+<script src="./js/js_highcharts/highcharts.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	  chart2 = new Highcharts.Chart({
          chart: {
-			renderTo: 'network'
+			renderTo: 'network',
+			type: 'pie'
 		 },
 		 rangeSelector: {
 			enabled: 0
@@ -162,17 +173,15 @@ $(document).ready(function() {
          },
 		 series: [ {
             name: 'Network Hashrate',
-            data: <?php echo $network_rate; ?>,
-			type: 'area'
+            data: <?php echo $network_rate; ?>
          },{
             name: 'Ars Hashrate',
-            data: <?php echo $hashrate; ?>,
-			type: 'area'
+            data: <?php echo $hashrate; ?>
          }]
 		 });
-	  */ ?>
+	 
    });
    </script>
-   
+   <?php /* */ ?>
 </body>
 </html>
