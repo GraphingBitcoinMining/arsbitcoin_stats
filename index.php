@@ -62,7 +62,12 @@ $(document).ready(function() {
 
                 $.each(this.points, function(i, point) {
 				color = point.series.color;
+				if (this.series.name == 'Workers') {
+					s += '<br /><span style="font-weight: bold; color: '+color+'">'+this.series.name + ':' + '</span>'+ Math.round(point.y);
+				}
+				else {
                     s += '<br /><span style="font-weight: bold; color: '+color+'">'+this.series.name + ':' + '</span>'+ Math.round(point.y*1000)/1000;
+				}
                 });
             
                 return s;
