@@ -15,7 +15,7 @@ $timestamp = $row[0];
 echo $timestamp;
 //This lets us run get more current stats if the api drops for some reason
 
-if ($timestamp+300 <= $now) {
+if ($timestamp+120 <= $now) {
 
 	if(isset($_GET['api_key'])) $api_key = $_GET['api_key'];
 	require_once('getstats.php');
