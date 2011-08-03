@@ -65,6 +65,9 @@ $(document).ready(function() {
 				else if (this.series.name == "Buffer") {
                     s += '<br /><span style="font-weight: bold; color: '+color+'">'+this.series.name + ':' + '</span>'+ Math.round(point.y*1000)/1000 + ' BTC';
 				}
+				else if (this.series.name == 'Users') {
+					s += '<br /><span style="font-weight: bold; color: '+color+'">'+this.series.name + ':' + '</span>'+ Math.round(point.y);
+				}
 				else {
                     s += '<br /><span style="font-weight: bold; color: '+color+'">'+this.series.name + ':' + '</span>'+ Math.round(point.y*1000)/1000;
 				}
@@ -137,7 +140,10 @@ $(document).ready(function() {
          }, {
 			name: 'Buffer',
 			data: <?php echo $buffer; ?>
-		}]
+		}, {
+            name: 'Users',
+            data: <?php echo $users; ?>
+         }]
 
       });
 	  });

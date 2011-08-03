@@ -58,6 +58,7 @@
 							$time_raw[] = (float)$row["time"]*1000;
 							$hashrate_raw[] = round((float)$row["hashrate"]/1000, 2);
 							$workers_raw[] = round((float)$row["workers"]);
+							$users_raw[] = (float)$row["users"];
 							$network_hashrate_raw[] = round((float)$row["network_hashrate"], 2);
 							$buffer_raw[] = (float)$row["buffer"];
 						  }
@@ -66,6 +67,7 @@
 							$hashrate = array_reverse($hashrate_raw);
 							$hashrate2 = end($hashrate);
 							$workers = array_reverse($workers_raw);
+							$users = array_reverse($users_raw);
 							
 							$network_rate = array_reverse($network_hashrate_raw);
 							
@@ -81,12 +83,12 @@
 							//get workers
 							$hasharray = array_map('make_pair2', $time, $workers);
 							$datapoints2 = json_encode($hasharray);
-							
+							$user_data = array_map('make_pair2', $time, $users);
 							
 							$buffer_array = array_map('make_pair', $time, $buffer);
 							$buffer = json_encode($buffer_array);
 							
-							$data = array('1'=>$hashrate,'2'=>$datapoints2,'3'=>$network_rate,'4'=>$hashrate2,'5'=>$y_max,'6'=>$buffer);
+							$data = array('1'=>$hashrate,'2'=>$datapoints2,'3'=>$network_rate,'4'=>$hashrate2,'5'=>$y_max,'6'=>$buffer, '7'=>$user_data);
 					//var_dump($data);
 					$memcache->set('hashrate', $data, 0, $expire ) or die ("Failed to save data at the server");
 				}
@@ -138,6 +140,7 @@ $last_hashrate = $result['4'];
 $y_max = $result['5'];
 echo $buffer;
 $buffer = $result['6'];
+$users = $result['7'];
 $local_hashrate = $last_hashrate;
 	
     $result = get_datapoints('blocks');
