@@ -18,7 +18,9 @@
 	function make_pair2($time, $workers) {
 		return array($time, $workers);
 	}
-	
+	function make_user_pair($time, $users) {
+		return array($time, $users);
+	}
 	function block_array($blocks) {
 		return array($blocks, 5000);
 	}
@@ -83,7 +85,8 @@
 							//get workers
 							$hasharray = array_map('make_pair2', $time, $workers);
 							$datapoints2 = json_encode($hasharray);
-							$user_data = array_map('make_pair2', $time, $users);
+							$user_array = array_map('make_user_pair', $time, $users);
+							$user_data = json_encode($user_array);
 							
 							$buffer_array = array_map('make_pair', $time, $buffer);
 							$buffer = json_encode($buffer_array);
