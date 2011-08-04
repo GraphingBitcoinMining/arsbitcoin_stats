@@ -60,7 +60,7 @@
 							$time_raw[] = (float)$row["time"]*1000;
 							$hashrate_raw[] = round((float)$row["hashrate"]/1000, 2);
 							$workers_raw[] = round((float)$row["workers"]);
-							$users_raw[] = (float)$row["users"];
+							$users_raw[] = (float)$row["currentusers"];
 							$network_hashrate_raw[] = round((float)$row["network_hashrate"], 2);
 							$buffer_raw[] = (float)$row["buffer"];
 						  }

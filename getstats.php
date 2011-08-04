@@ -33,10 +33,10 @@ $json_data_personal=json_decode($json_string_personal);
 $hashrate_global = $json_data_global->hashrate;
 //$workers = $json_data_global->currentworkers;
 $buffer = $json_data_global->smppsbuffer;
-$users = $json_data_global->users;
+$users = $json_data_global->currentusers;
 echo 'Global hashrate: '.$hashrate_global.'<br>';
 //echo 'Global workers: '.$workers.'<br>';
-echo 'Buffer: '.$buffer;
+echo 'Buffer: '.$buffer."<br>";
 echo "Users: ".$users;
 echo '<br>';
 // End global
