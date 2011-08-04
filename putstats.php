@@ -24,7 +24,7 @@ if ($timestamp+300 <= $now) {
 	//$sql_global = "INSERT INTO `arsbtcstats`.`global_stats` (`id`, `time`, `hashrate`, `workers`) VALUES (NULL, '$now', '$hashrate_global', '$workers');";
 	//$query_global = mysql_query($sql_global);
 
-	$sql_global = "INSERT INTO `arsbtcstats`.`global_stats` (`id`, `time`, `hashrate`, `workers`, `network_hashrate`, `buffer`, `users`) VALUES (NULL, '$now', '$hashrate_global', 'null, '$network_hashrate', '$buffer', '$users');";
+	$sql_global = "INSERT INTO `arsbtcstats`.`global_stats` (`id`, `time`, `hashrate`, `workers`, `network_hashrate`, `buffer`, `Users`) VALUES (NULL, '$now', '$hashrate_global', 'null, '$network_hashrate', '$buffer', '$users');";
 	$query_global = mysql_query($sql_global);
 
 	$sql_personal = "INSERT INTO `arsbtcstats`.`personal_stats` (`id`, `time`, `hashrate`, `confirmed_rewards`, `payout_history`) VALUES (NULL, '$now', '$hashrate_personal', '$confirmed_rewards', '$payout_history');";
