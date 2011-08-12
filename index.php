@@ -136,7 +136,8 @@ $(document).ready(function() {
             data: <?php echo $hashrate; ?>
          }, {
             name: 'Workers',
-            data: <?php echo $workers; ?>
+            data: <?php echo $workers; ?>,
+			visible: false
          }, {
 			name: 'Buffer',
 			data: <?php echo $buffer; ?>
