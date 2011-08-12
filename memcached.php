@@ -84,13 +84,30 @@
 							//var_dump($datapoints);
 							//get workers
 							$i=0;
-							$count = 0;
 							$hasharray = array_map('make_pair2', $time, $workers);
 							
+							$count = count($hasharray);
+							while ($i < $count) {
+							//var_dump($hasharray[$i]);
+								if ($hasharray[$i][1] == 0) {
+									unset($hasharray[$i]);
+								}
+								$i++;
+							}
 							$hasharray = array_values($hasharray);
 							//var_dump($hasharray);
 							$datapoints2 = json_encode($hasharray);
 							$user_array = array_map('make_user_pair', $time, $users);
+							$i=0;
+							$count = count($user_array);
+							while ($i < $count) {
+							//var_dump($hasharray[$i]);
+								if ($user_array[$i][1] == 0) {
+									unset($user_array[$i]);
+								}
+								$i++;
+							}
+							$user_array = array_values($user_array);
 							$user_data = json_encode($user_array);
 							
 							$buffer_array = array_map('make_pair', $time, $buffer);
