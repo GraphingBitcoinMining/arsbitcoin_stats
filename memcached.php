@@ -86,12 +86,16 @@
 							$i=0;
 							$hasharray = array_map('make_pair2', $time, $workers);
 							
+							$buffer_array = array_map('make_pair', $time, $buffer);
+							$buffer = json_encode($buffer_array);
+							
 							$count = count($hasharray);
 							while ($i < $count) {
 							//var_dump($hasharray[$i]);
 								if ($hasharray[$i][1] == 0) {
+									if ($buffer_array[$i][1] != 0) {
 									unset($hasharray[$i]);
-								}
+								}}
 								$i++;
 							}
 							$hasharray = array_values($hasharray);
@@ -103,15 +107,15 @@
 							while ($i < $count) {
 							//var_dump($hasharray[$i]);
 								if ($user_array[$i][1] == 0) {
+								if ($buffer_array[$i][1] != 0) {
 									unset($user_array[$i]);
-								}
+								}}
 								$i++;
 							}
 							$user_array = array_values($user_array);
 							$user_data = json_encode($user_array);
 							
-							$buffer_array = array_map('make_pair', $time, $buffer);
-							$buffer = json_encode($buffer_array);
+							
 							
 							$data = array('1'=>$hashrate,'2'=>$datapoints2,'3'=>$network_rate,'4'=>$hashrate2,'5'=>$y_max,'6'=>$buffer, '7'=>$user_data);
 					//var_dump($data);
