@@ -42,7 +42,7 @@
 			//echo "Checking cache for hashrate<br><br>";
 				$data = $memcache->get('hashrate');
 				
-				if (!$data) {
+				if (!$data || $data) {
 					//echo "<br><br>Not Memcached<br><br>";
 					$data = array();
 					//echo "running query for hashrate<br><br>";
@@ -63,9 +63,11 @@
 							$users_raw[] = (float)$row["Users"];
 							$network_hashrate_raw[] = round((float)$row["network_hashrate"], 2);
 							$buffer_raw[] = (float)$row["buffer"];
+							$average_raw[] = round((float)$row["average"]/1000,2);
 						  }
+						  
 							$time = array_reverse($time_raw);
-							
+							$average = array_reverse($average_raw);
 							$hashrate = array_reverse($hashrate_raw);
 							$hashrate2 = end($hashrate);
 							$workers = array_reverse($workers_raw);
@@ -114,10 +116,24 @@
 							}
 							$user_array = array_values($user_array);
 							$user_data = json_encode($user_array);
+							$average_array = array_map('make_pair', $time, $average);
+							//echo "<h2>Average Array Preprocessing</h2>";
+							//var_dump($average_array);
+							$i=0;
+							$count = count($average_array);
+							while ($i < $count) {
+							//var_dump($hasharray[$i]);
+								if ($average_array[$i][0]  < 1313181061000) {
+									unset($average_array[$i]);
+								}
+								$i++;
+							}
+							$average_array = array_values($average_array);
+							//echo "<h2>Average Array Postprocessing</h2>";
+							//var_dump($average_array);
+							$average = json_encode($average_array);
 							
-							
-							
-							$data = array('1'=>$hashrate,'2'=>$datapoints2,'3'=>$network_rate,'4'=>$hashrate2,'5'=>$y_max,'6'=>$buffer, '7'=>$user_data);
+							$data = array('1'=>$hashrate,'2'=>$datapoints2,'3'=>$network_rate,'4'=>$hashrate2,'5'=>$y_max,'6'=>$buffer, '7'=>$user_data, '8' => $average);
 					//var_dump($data);
 					$memcache->set('hashrate', $data, 0, $expire ) or die ("Failed to save data at the server");
 				}
@@ -152,7 +168,7 @@
 				}
 				return $data;
 			}
-	}
+			}
     $debug = $_GET['debug'];
     
     
@@ -170,6 +186,8 @@ $y_max = $result['5'];
 echo $buffer;
 $buffer = $result['6'];
 $users = $result['7'];
+$average = $result['8'];
+
 $local_hashrate = $last_hashrate;
 	
     $result = get_datapoints('blocks');

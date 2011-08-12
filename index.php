@@ -143,7 +143,11 @@ $(document).ready(function() {
 		}, {
             name: 'Users',
             data: <?php echo $users; ?>
-         }]
+         },{
+			name: '3 hour average',
+			data: <?php echo $average; ?>,
+			color: '#00ff00'
+		}]
 
       });
 	  });
