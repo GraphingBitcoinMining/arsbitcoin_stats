@@ -83,7 +83,12 @@
 							$hashrate = json_encode($hasharray);
 							//var_dump($datapoints);
 							//get workers
+							$i=0;
+							$count = 0;
 							$hasharray = array_map('make_pair2', $time, $workers);
+							
+							$hasharray = array_values($hasharray);
+							//var_dump($hasharray);
 							$datapoints2 = json_encode($hasharray);
 							$user_array = array_map('make_user_pair', $time, $users);
 							$user_data = json_encode($user_array);
