@@ -126,8 +126,7 @@ $(document).ready(function() {
 			}
 		},
          yAxis: {
-		 min: 0,
-            title: {
+		 title: {
                text: 'value'
             }
          },
