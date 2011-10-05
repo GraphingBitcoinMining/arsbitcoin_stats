@@ -42,7 +42,7 @@
 			//echo "Checking cache for hashrate<br><br>";
 				$data = $memcache->get('hashrate');
 				
-				if (!$data || $data) {
+				if (!$data) {
 					//echo "<br><br>Not Memcached<br><br>";
 					$data = array();
 					//echo "running query for hashrate<br><br>";
