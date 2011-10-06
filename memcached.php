@@ -62,7 +62,7 @@
 							$workers_raw[] = round((float)$row["workers"]);
 							$users_raw[] = (float)$row["Users"];
 							$network_hashrate_raw[] = round((float)$row["network_hashrate"], 2);
-							$buffer_raw[] = (float)str_replace(',','',$row["buffer"]);
+							$buffer_raw[] = (float)$row["buffer"];
 							$average_raw[] = round((float)$row["average"]/1000,2);
 						  }
 						  
